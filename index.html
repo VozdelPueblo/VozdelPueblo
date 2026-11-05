@@ -88,6 +88,15 @@ main{padding:10px 0 56px}
 .likes button{background:#fff;border:1px solid #9AA2AC;border-radius:3px;padding:6px 12px;min-height:40px;font-size:14px}
 .likes button[aria-pressed="true"]{background:var(--pri);border-color:var(--pri);color:#fff}
 .likes .res{font-size:13px;color:var(--muted)}
+.next-top{margin:12px 0 0;padding:10px 12px;background:var(--pri-l);border-left:4px solid var(--pri);border-radius:3px}
+.next{background:var(--pri);color:#fff;border-radius:4px;padding:20px;margin-bottom:20px}
+.next h2{color:#fff;margin:0 0 4px}
+.next p{margin:0 0 14px;color:#D6E3F0}
+.next-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.next-grid a{display:block;background:#fff;color:var(--ink);text-decoration:none;border-radius:4px;padding:12px 14px;border-bottom:3px solid transparent}
+.next-grid a:hover,.next-grid a:focus{border-bottom-color:var(--warn)}
+.next-grid b{display:block;color:var(--pri);font-size:17px;margin-bottom:2px}
+.next-grid span{font-size:14px;color:var(--muted)}
 .draft{border:2px dashed #E3B07A;background:#FFF8EE;border-radius:4px;padding:16px 18px;margin-bottom:20px}
 .src{font-size:13px;color:var(--muted);margin-top:10px;border-top:1px solid var(--soft);padding-top:8px}
 .src a{color:var(--muted)}
@@ -230,7 +239,6 @@ footer a{color:#fff}
     <a href="#cuentas" data-tab="cuentas">Cuentas públicas</a>
     <a href="#poder" data-tab="poder">Poder económico</a>
     <a href="#comunicaciones" data-tab="comunicaciones">Comunicaciones</a>
-    <a href="#glosario" data-tab="glosario">Glosario</a>
   </div></nav>
 </header>
 
@@ -245,12 +253,7 @@ footer a{color:#fff}
   <div class="draft">
     <h2 style="margin-bottom:6px">Propuesta en proceso de creación</h2>
     <p style="margin:0 0 12px">Esto es un borrador. Explica por encima cómo creo que debería funcionar la democracia en España y qué reformas harían falta. Vota si te gusta cada punto y di qué cambiarías: con vuestras respuestas la iré mejorando. He dejado fuera muchas ideas sobre temas más internos: como no formo parte de la política actual, no tengo datos para decidir sobre ellos.</p>
-    <div class="box" style="margin:0" id="likeAll">
-      <h3>¿Te gusta la idea en general?</h3>
-      <div class="likes" data-punto="general"></div>
-      <label class="field" style="margin:12px 0 8px">¿Qué cambiarías o añadirías? (opcional, no se publica)<textarea id="likeText" style="min-height:70px" placeholder="Ej.: El 75% me parece demasiado; propondría el 66%."></textarea></label>
-      <button type="button" class="btn sec" id="likeSend">Enviar comentario</button> <span class="small muted" id="likeSent"></span>
-    </div>
+    <p class="next-top"><strong>La web tiene más apartados.</strong> Después de votar los puntos, puedes votar leyes reales que ya ha aprobado el Congreso, ordenar tus prioridades y enviar propuestas. Los tienes al final de esta página y en el menú de arriba.</p>
   </div>
 
   <div class="cols">
@@ -296,12 +299,30 @@ footer a{color:#fff}
         <p style="margin:14px 0 0"><button type="button" class="btn sec" id="howBtn">Qué haría falta para que este sistema existiera</button></p>
         <div class="src">Fuente: <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229">Constitución Española en el BOE</a> (arts. 68, 72, 87, 92, 166, 167 y 168)</div>
       </div>
+      <div class="box" id="likeAll">
+        <h2>¿Te gusta la idea en general?</h2>
+        <div class="likes" data-punto="general"></div>
+        <label class="field" style="margin:12px 0 8px">¿Qué cambiarías o añadirías? (opcional, no se publica)<textarea id="likeText" style="min-height:70px" placeholder="Ej.: El 75% me parece demasiado; propondría el 66%."></textarea></label>
+        <button type="button" class="btn sec" id="likeSend">Enviar comentario</button> <span class="small muted" id="likeSent"></span>
+      </div>
+      <div class="next" id="sigue">
+        <h2>Sigue participando</h2>
+        <p>Tu voto en la propuesta ya cuenta. Esto es lo que puedes hacer ahora:</p>
+        <div class="next-grid">
+          <a href="#reformas"><b>Vota leyes reales</b><span>Compara tu voto con lo que votó el Congreso: vivienda, reforma laboral, jornada, salario mínimo.</span></a>
+          <a href="#prioridades"><b>Ordena tus prioridades</b><span>Di qué problema debería resolverse primero.</span></a>
+          <a href="#buzon"><b>Envía una propuesta</b><span>Una idea para mejorar esto o una irregularidad que conozcas.</span></a>
+          <a href="#cuentas"><b>Mira las cuentas públicas</b><span>En qué se gasta el presupuesto del Estado.</span></a>
+          <a href="#poder"><b>Poder económico</b><span>Grandes fortunas, empresas y lo que pagan.</span></a>
+          <a href="#comunicaciones"><b>Comunicaciones</b><span>Cómo se verían publicadas las comunicaciones de los cargos.</span></a>
+        </div>
+      </div>
     </div>
 
     <div class="col-side">
       <div class="box">
         <h2>Participa</h2>
-        <p class="small">La propuesta está en construcción. Vota los puntos de la izquierda, prueba cómo funcionaría y deja tus ideas.</p>
+        <p class="small">La propuesta está en construcción. Vota los puntos de la propuesta, prueba cómo funcionaría y deja tus ideas.</p>
         <p><a class="btn" href="#reformas" style="width:100%;text-decoration:none">Vota una reforma</a></p>
         <p><a class="btn sec" href="#prioridades" style="width:100%;text-decoration:none">Ordena tus prioridades</a></p>
         <p style="margin:0"><a class="btn sec" href="#buzon" style="width:100%;text-decoration:none">Envía una propuesta</a></p>
