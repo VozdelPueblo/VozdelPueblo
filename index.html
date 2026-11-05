@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voz del Pueblo — Portal de participación y transparencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#F4F5F7;--card:#FFFFFF;--ink:#1B1F24;--muted:#565D66;--line:#D5D9DE;--soft:#EEF0F3;--pri:#12497A;--pri-d:#0C3459;--pri-l:#E6EEF6;--warn:#A63C0A;--warn-l:#FBEFE7;--ok:#1E6B38;--ok-l:#E7F3EB}
+*{box-sizing:border-box}
+html{scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Source Sans 3',Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;font-variant-numeric:tabular-nums}
+a{color:var(--pri)}a:hover{color:var(--pri-d)}
+button{font:inherit;cursor:pointer;color:inherit}
+button:disabled{cursor:not-allowed;opacity:.5}
+input,textarea{font:inherit;color:var(--ink);background:#fff;border:1px solid #9AA2AC;border-radius:3px;padding:9px 11px;width:100%}
+textarea{min-height:96px;resize:vertical}
+:focus-visible{outline:3px solid #F2B705;outline-offset:1px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.xs{font-size:13px}
+h1{font-size:30px;line-height:1.2;margin:0 0 6px;font-weight:700}
+h2{font-size:20px;margin:0 0 4px;font-weight:700}
+h3{font-size:16px;margin:0 0 6px;font-weight:700}
+p{margin:0 0 10px}
+.r{text-align:right}
+.nowrap{white-space:nowrap}
+
+/* aviso y cabecera */
+.notice{background:#2B2F36;color:#E9ECEF;font-size:13px}
+.notice .wrap{padding-top:7px;padding-bottom:7px}
+header.site{background:#fff;border-bottom:1px solid var(--line)}
+.hbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;padding-bottom:14px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand b{display:block;font-size:20px;line-height:1.1}
+.brand span{display:block;font-size:13px;color:var(--muted)}
+.session{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.session strong{color:var(--ink)}
+nav.main{background:var(--pri)}
+nav.main .wrap{display:flex;flex-wrap:wrap}
+nav.main a{color:#fff;text-decoration:none;padding:12px 16px;font-weight:600;font-size:15px;border-bottom:3px solid transparent;min-height:46px;display:inline-flex;align-items:center}
+nav.main a:hover{background:var(--pri-d)}
+nav.main a[aria-current="page"]{background:var(--pri-d);border-bottom-color:#F2B705}
+.crumbs{font-size:14px;color:var(--muted);padding:14px 0 0}
+.crumbs a{color:var(--muted)}
+main{padding:10px 0 56px}
+.intro{max-width:820px;color:var(--muted);margin-bottom:22px}
+
+/* bloques */
+.box{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px;margin-bottom:20px}
+.box-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}
+.cols{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.col-main{flex:999 1 560px;min-width:0}
+.col-side{flex:1 1 300px;min-width:0}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.kpi{border:1px solid var(--line);border-radius:4px;padding:14px;background:#fff}
+.kpi .v{font-size:24px;font-weight:700;line-height:1.2}
+.kpi .l{font-size:14px;color:var(--muted)}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.02em;padding:1px 7px;border-radius:2px;border:1px solid;white-space:nowrap}
+.tag.real{color:var(--ok);border-color:#8CC29F;background:var(--ok-l)}
+.tag.sim{color:#5B6169;border-color:#B9BEC5;background:#F3F4F6}
+.tag.user{color:#7A3E00;border-color:#E3B07A;background:#FFF3E3}
+.notice .tag{border-color:transparent}
+.prop-n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--pri);color:#fff;font-weight:700;border-radius:2px;flex:none}
+.prop-item{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--soft)}
+.likes{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px}
+.likes button{background:#fff;border:1px solid #9AA2AC;border-radius:3px;padding:6px 12px;min-height:40px;font-size:14px}
+.likes button[aria-pressed="true"]{background:var(--pri);border-color:var(--pri);color:#fff}
+.likes .res{font-size:13px;color:var(--muted)}
+.draft{border:2px dashed #E3B07A;background:#FFF8EE;border-radius:4px;padding:16px 18px;margin-bottom:20px}
+.src{font-size:13px;color:var(--muted);margin-top:10px;border-top:1px solid var(--soft);padding-top:8px}
+.src a{color:var(--muted)}
+.callout{border-left:4px solid var(--pri);background:var(--pri-l);padding:12px 14px;font-size:15px;margin-bottom:14px}
+.callout.warn{border-color:var(--warn);background:var(--warn-l)}
+
+/* tablas */
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font-weight:700;font-size:14px;color:#3B4148;background:var(--soft);padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--soft);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tfoot td{font-weight:700;border-top:1px solid var(--line)}
+.bar{height:8px;background:var(--soft);border-radius:1px;position:relative;min-width:80px}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--pri);display:block}
+
+/* botones y formularios */
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--pri);color:#fff;border:1px solid var(--pri);border-radius:3px;padding:10px 18px;font-weight:700;min-height:44px}
+.btn:hover:not(:disabled){background:var(--pri-d)}
+.btn.sec{background:#fff;color:var(--pri)}
+.link{background:none;border:0;padding:0;color:var(--pri);text-decoration:underline;text-underline-offset:2px;font-weight:600;text-align:left}
+.field{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:15px;margin-bottom:14px}
+.field .hint{font-weight:400;font-size:14px;color:var(--muted)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{background:#fff;border:1px solid #9AA2AC;border-radius:3px;padding:8px 12px;font-size:15px;min-height:44px;text-align:left}
+.opt[aria-pressed="true"]{background:var(--pri);border-color:var(--pri);color:#fff}
+.opt .n{display:inline-block;margin-left:6px;background:#fff;color:var(--pri);font-weight:700;font-size:12px;padding:0 6px;border-radius:2px}
+.radio{display:flex;align-items:flex-start;gap:10px;border:1px solid #9AA2AC;border-radius:3px;padding:12px 14px;background:#fff;width:100%;text-align:left;min-height:44px}
+.radio .dot{width:18px;height:18px;border-radius:50%;border:2px solid #6B737D;flex:none;margin-top:2px}
+.radio[aria-pressed="true"]{border-color:var(--pri);box-shadow:inset 0 0 0 1px var(--pri)}
+.radio[aria-pressed="true"] .dot{border-color:var(--pri);background:radial-gradient(var(--pri) 45%,#fff 50%)}
+.sub{background:#F8F9FA;border:1px solid var(--line);border-radius:3px;padding:16px;margin-top:12px}
+
+/* reformas */
+.rlist{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:4px;background:#fff}
+.rlist li+li{border-top:1px solid var(--line)}
+.ritem{display:block;width:100%;background:none;border:0;padding:14px 16px;text-align:left;border-left:4px solid transparent}
+.ritem[aria-pressed="true"]{background:var(--pri-l);border-left-color:var(--pri)}
+.ritem .st{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ritem .t{display:block;font-weight:700;font-size:16px;margin-top:2px}
+.ritem .o{display:block;font-size:14px;color:var(--muted)}
+.steps{list-style:none;margin:0 0 18px;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.steps li{padding:9px 10px;font-size:14px;background:#fff;border-right:1px solid var(--line);color:var(--muted)}
+.steps li:last-child{border-right:0}
+.steps li b{display:block;font-size:12px}
+.steps li.done{background:var(--soft);color:var(--ink)}
+.steps li.now{background:var(--pri);color:#fff}
+.meter .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.meter .v{font-size:26px;font-weight:700}
+.mbar{position:relative;height:14px;background:var(--soft);margin:8px 0 6px}
+.mbar i{position:absolute;left:0;top:0;bottom:0;display:block}
+.mbar .line{position:absolute;left:75%;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.law-art{border-top:1px solid var(--line);padding:12px 0}
+.law-art p{margin:0}
+.obj{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--soft);font-size:15px}
+.vsq{display:inline-block;width:12px;height:12px;margin-right:3px;vertical-align:-1px}
+.vsq.y{background:var(--pri)}.vsq.o{background:var(--warn)}.vsq.n{border:2px solid #7A828C}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--muted);margin-top:10px}
+
+/* prioridades */
+.myrank{list-style:none;margin:0;padding:0}
+.myrank li{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:3px;padding:6px 6px 6px 12px;margin-bottom:6px;background:#fff}
+.myrank .p{font-weight:700;width:28px;color:var(--pri)}
+.myrank .nm{flex:1}
+.ic{background:#fff;border:1px solid #9AA2AC;border-radius:3px;width:40px;height:40px}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(20,24,30,.55);display:flex;align-items:flex-start;justify-content:center;padding:32px 14px;overflow-y:auto;z-index:50}
+.mbox{background:#fff;border-radius:4px;max-width:780px;width:100%;padding:24px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.mhead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:16px}
+.mclose{background:#fff;border:1px solid #9AA2AC;border-radius:3px;width:44px;height:44px;font-size:18px;flex:none}
+dl.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px;margin:0 0 16px;font-size:15px}
+dl.meta dt{font-size:13px;color:var(--muted)}
+dl.meta dd{margin:0;font-weight:600}
+.belongs{border:1px solid #8FB2D3;background:var(--pri-l);border-radius:3px;padding:14px;margin-bottom:16px}
+.belongs ol{margin:6px 0 0;padding-left:20px}
+.belongs li{margin-bottom:4px}
+
+/* comunicaciones */
+.citem{display:flex;gap:12px;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid var(--line);padding:12px 4px}
+.citem:hover{background:#F8F9FA}
+.ctype{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);width:76px;flex:none;padding-top:2px}
+.chat{display:flex;flex-direction:column;gap:8px}
+.msg{max-width:80%;padding:9px 12px;border-radius:3px;font-size:15px;border:1px solid var(--line)}
+.msg.me{align-self:flex-end;background:var(--pri-l)}
+.msg.them{align-self:flex-start;background:#F8F9FA}
+.msg small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.redact{background:#1B1F24;color:#fff;padding:0 5px;font-size:12px}
+.player{display:flex;align-items:center;gap:12px;border:1px solid var(--line);padding:10px;border-radius:3px;margin-bottom:12px}
+.tline{display:grid;grid-template-columns:56px 1fr;gap:10px;padding:7px 0;border-top:1px solid var(--soft);font-size:15px}
+.seg{display:inline-flex;border:1px solid #9AA2AC;border-radius:3px;overflow:hidden}
+.seg button{background:#fff;border:0;border-right:1px solid #9AA2AC;padding:8px 14px;min-height:42px;font-size:15px}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--pri);color:#fff}
+
+.law{border:1px solid var(--line);border-radius:4px;padding:16px;margin-bottom:14px}
+.law-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:flex-start}
+.law .st{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.law .cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:12px}
+.law .who{font-size:14px;margin:8px 0 0}
+.law details{margin-top:10px}
+.law summary{cursor:pointer;font-weight:600;color:var(--pri)}
+@media (max-width:760px){.law .cmp{grid-template-columns:minmax(0,1fr)}}
+.term{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+.term:hover{color:var(--pri)}
+#glossList dt{font-weight:700;margin-top:14px;font-size:17px}
+#glossList dd{margin:2px 0 0;border-bottom:1px solid var(--soft);padding-bottom:12px}
+.gsrc{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+footer{border-top:0;background:#2B2F36;color:#C9CED4;font-size:14px}
+footer .wrap{padding-top:22px;padding-bottom:22px;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+footer a{color:#fff}
+
+@media (max-width:760px){
+  h1{font-size:25px}.box{padding:16px}
+  .g2,.g3{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .steps li{border-right:0;border-bottom:1px solid var(--line)}
+  nav.main a{padding:10px 12px;font-size:14px}
+  dl.meta{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="notice"><div class="wrap"><strong>Una nueva democracia, del pueblo para el pueblo.</strong> No es una web oficial ni pertenece a ningún partido. <span class="tag real">Dato real</span> = comprobado y con fuente · <span class="tag sim">Simulado</span> = inventado para enseñar cómo funcionaría · <span class="tag user">Respuesta real</span> = lo que envían las personas que visitan esta web.</div></div>
+
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="#propuesta">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" fill="#12497A"/><path d="M9 12h22M9 20h14M9 28h18" stroke="#fff" stroke-width="3"/></svg>
+      <span><b>Voz del Pueblo</b><span>Una nueva democracia, del pueblo para el pueblo</span></span>
+    </a>
+    <div class="session" id="modeChip"></div>
+  </div>
+  <nav class="main" aria-label="Secciones"><div class="wrap">
+    <a href="#propuesta" data-tab="propuesta">La propuesta</a>
+    <a href="#reformas" data-tab="reformas">Reformas</a>
+    <a href="#prioridades" data-tab="prioridades">Prioridades ciudadanas</a>
+    <a href="#buzon" data-tab="buzon">Buzón y denuncias</a>
+    <a href="#cuentas" data-tab="cuentas">Cuentas públicas</a>
+    <a href="#poder" data-tab="poder">Poder económico</a>
+    <a href="#comunicaciones" data-tab="comunicaciones">Comunicaciones</a>
+    <a href="#glosario" data-tab="glosario">Glosario</a>
+  </div></nav>
+</header>
+
+<main class="wrap">
+
+<!-- ================= LA PROPUESTA ================= -->
+<section data-view="propuesta">
+  <div class="crumbs">Inicio › La propuesta</div>
+  <h1 style="margin-top:8px">Una democracia en la que el pueblo vote cada reforma</h1>
+  <p class="intro">Soy Edu, un trabajador, como seguramente todos los que entráis en esta web. No encuentro ningún partido que proponga cambiar cómo se toman las decisiones, así que he escrito cómo creo que podría funcionar. Esta web es un prototipo para enseñarlo y saber qué opináis. Podéis votar, ordenar vuestras prioridades y enviar propuestas: son respuestas reales.</p>
+
+  <div class="draft">
+    <h2 style="margin-bottom:6px">Propuesta en proceso de creación</h2>
+    <p style="margin:0 0 12px">Esto es un borrador. Explica por encima cómo creo que debería funcionar la democracia en España y qué reformas harían falta. Vota si te gusta cada punto y di qué cambiarías: con vuestras respuestas la iré mejorando. He dejado fuera muchas ideas sobre temas más internos: como no formo parte de la política actual, no tengo datos para decidir sobre ellos.</p>
+    <div class="box" style="margin:0" id="likeAll">
+      <h3>¿Te gusta la idea en general?</h3>
+      <div class="likes" data-punto="general"></div>
+      <label class="field" style="margin:12px 0 8px">¿Qué cambiarías o añadirías? (opcional, no se publica)<textarea id="likeText" style="min-height:70px" placeholder="Ej.: El 75% me parece demasiado; propondría el 66%."></textarea></label>
+      <button type="button" class="btn sec" id="likeSend">Enviar comentario</button> <span class="small muted" id="likeSent"></span>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="col-main">
+      <div class="box">
+        <h2>Por qué</h2>
+        <p>Según la encuesta del CIS sobre calidad de la democracia (julio de 2026), el <strong>75,3%</strong> cree que a los políticos no les importa lo que piensa la gente, y solo el <strong>20,5%</strong> está satisfecho con cómo funciona la democracia en España. <span class="tag real">Dato real</span></p>
+        <p style="margin:0">Votamos cada cuatro años y, entre medias, cada diputado vota lo que le dice su partido. Esta propuesta busca que la gente participe en cada decisión importante y pueda comprobar en qué se gasta cada euro.</p>
+        <div class="src">Fuente: <a href="https://www.eldiario.es/andalucia/en-abierto/politica-no-problema-imagen_132_13414339.html">elDiario.es, sobre la IV Encuesta de Calidad de la Democracia del CIS</a></div>
+      </div>
+
+      <div class="box">
+        <h2>Cómo funcionaría</h2>
+        <ol class="steps" aria-label="El ciclo" style="margin:12px 0 4px">
+          <li class="done"><b>1</b>El pueblo dice qué le preocupa</li>
+          <li class="done"><b>2</b>El Gobierno redacta la reforma</li>
+          <li class="done"><b>3</b>Los partidos escuchan y negocian</li>
+          <li class="now"><b>4</b>El pueblo vota</li>
+          <li class="done"><b>5</b>Se aplica si lo quiere el 75%</li>
+        </ol>
+        <div class="prop-item"><span class="prop-n">1</span><div><strong>Un Parlamento de portavoces con voto ponderado.</strong> Cada partido que reciba votos tiene 5 portavoces, aunque no llegue a sacar escaño. Cada portavoz vota con una quinta parte del porcentaje de votos de su partido. Así nadie se queda sin voz y cada voto pesa lo que vale.<div class="likes" data-punto="portavoces"></div></div></div>
+        <div class="prop-item"><span class="prop-n">2</span><div><strong>El «no» solo cuenta con una objeción.</strong> Quien vota en contra, sea un partido o una persona, tiene que decir qué artículo cambiaría y cómo. Así cada «no» abre una negociación en lugar de bloquear por bloquear. También se puede votar «sí» y dejar una valoración.<div class="likes" data-punto="objecion"></div></div></div>
+        <div class="prop-item"><span class="prop-n">3</span><div><strong>El 75%.</strong> Una reforma se aplica solo si la aprueba el 75% del Parlamento (ponderado) y el 75% de las personas que votan. Si no llega, se negocia con las objeciones y se vuelve a votar.<div class="likes" data-punto="mayoria75"></div></div></div>
+        <div class="prop-item"><span class="prop-n">4</span><div><strong>Votar en bibliotecas y colegios públicos con DNI.</strong> El personal comprueba la identidad y da acceso; el voto es secreto y no queda unido al DNI. Así se evitan los votos falsos y el hackeo del voto por internet.<div class="likes" data-punto="bibliotecas"></div></div></div>
+        <div class="prop-item"><span class="prop-n">5</span><div><strong>Las prioridades las pone el pueblo.</strong> Cada persona ordena lo que le preocupa y puede cambiarlo cuando quiera. El Gobierno empieza por lo primero de la lista.<div class="likes" data-punto="prioridades"></div></div></div>
+        <div class="prop-item"><span class="prop-n">6</span><div><strong>Transparencia total.</strong> Cada factura pagada con dinero público, con la empresa que la cobra y para qué. Sueldo, bienes y gastos de cada cargo público. Las reuniones con empresas y lobbies. Y los correos, mensajes y llamadas hechos con medios de trabajo, publicados a los 30 días.<div class="likes" data-punto="transparencia"></div></div></div>
+        <div class="prop-item"><span class="prop-n">7</span><div><strong>Urgencias.</strong> En una emergencia real, el Gobierno decide sin esperar a todo el proceso y rinde cuentas después.<div class="likes" data-punto="urgencias"></div></div></div>
+      </div>
+
+      <div class="box">
+        <h2>Qué haría falta para hacerlo</h2>
+        <p class="muted small">Esto es lo que dice la Constitución hoy. <span class="tag real">Dato real</span></p>
+        <div class="tbl"><table>
+          <thead><tr><th>Medida</th><th>Qué hace falta</th></tr></thead>
+          <tbody>
+            <tr><td>Registro de prioridades, puntos de voto y consultas en bibliotecas</td><td>Una ley aprobada por mayoría en el Congreso. Las consultas serían orientativas: hoy la Constitución solo prevé referéndums consultivos (art. 92).</td></tr>
+            <tr><td>Transparencia total de cuentas, bienes y comunicaciones</td><td>Leyes nuevas y cambiar la Ley General Tributaria (secreto tributario, art. 95) y la Ley de Secretos Oficiales.</td></tr>
+            <tr><td>El «no» con objeción en el Parlamento</td><td>Cambiar el Reglamento del Congreso, que se aprueba por mayoría absoluta (art. 72). Con la Constitución actual no se puede anular el voto de un diputado.</td></tr>
+            <tr><td>Portavoces en lugar de diputados</td><td>Reformar la Constitución (el art. 68 fija entre 300 y 400 diputados) por el art. 167: 3/5 del Congreso y 3/5 del Senado, o mayoría absoluta del Senado y 2/3 del Congreso. Referéndum si lo pide una décima parte de cualquiera de las cámaras.</td></tr>
+            <tr><td>Referéndum vinculante de cada reforma</td><td>Reformar la Constitución por el mismo art. 167. Si la reforma tocara los derechos fundamentales, el título preliminar o la Corona, haría falta el art. 168: 2/3 de las dos cámaras, nuevas elecciones, otra vez 2/3 y referéndum obligatorio.</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin:14px 0 0"><button type="button" class="btn sec" id="howBtn">Qué haría falta para que este sistema existiera</button></p>
+        <div class="src">Fuente: <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229">Constitución Española en el BOE</a> (arts. 68, 72, 87, 92, 166, 167 y 168)</div>
+      </div>
+    </div>
+
+    <div class="col-side">
+      <div class="box">
+        <h2>Participa</h2>
+        <p class="small">La propuesta está en construcción. Vota los puntos de la izquierda, prueba cómo funcionaría y deja tus ideas.</p>
+        <p><a class="btn" href="#reformas" style="width:100%;text-decoration:none">Vota una reforma</a></p>
+        <p><a class="btn sec" href="#prioridades" style="width:100%;text-decoration:none">Ordena tus prioridades</a></p>
+        <p style="margin:0"><a class="btn sec" href="#buzon" style="width:100%;text-decoration:none">Envía una propuesta</a></p>
+      </div>
+      <div class="box">
+        <h2>Problemas que reconozco</h2>
+        <ul style="margin:8px 0 0;padding-left:20px" class="small">
+          <li><strong>Participación:</strong> si vota poca gente, deciden los más movilizados. Haría falta un mínimo de participación.</li>
+          <li><strong>Minorías:</strong> ni siquiera un 75% podría votar contra los derechos fundamentales de otros. El Tribunal Constitucional seguiría siendo el límite.</li>
+          <li><strong>El 75% es exigente:</strong> un 26% bien organizado puede bloquear. La obligación de objetar es lo que lo compensa.</li>
+          <li><strong>Esta web no es una votación oficial:</strong> no pide DNI. Es un sondeo de opinión.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h2>Privacidad de tu voto</h2>
+        <ul style="margin:8px 0 0;padding-left:20px" class="small">
+          <li>No se pide nombre, correo ni DNI.</li>
+          <li>Para que cada conexión cuente una sola vez, se guarda un <strong>código irreversible</strong> calculado a partir de tu IP con una clave secreta. La IP no se guarda y con el código no se puede saber quién eres.</li>
+          <li>Si vuelves a votar desde la misma conexión, se sustituye tu voto anterior. Si varias personas comparten conexión (casa, trabajo), cuenta un solo voto.</li>
+          <li>Nadie, ni siquiera yo, veo qué ha votado cada persona: solo los totales.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REFORMAS ================= -->
+<section data-view="reformas" class="hidden">
+  <div class="crumbs">Inicio › Reformas</div>
+  <h1 style="margin-top:8px">Reformas</h1>
+  <p class="intro">Primero, leyes reales que ya se han votado en el Congreso: compara lo que decidieron los diputados con lo que votarían los visitantes. Debajo, un ejemplo simulado de cómo funcionaría el proceso completo.</p>
+
+  <div class="box">
+    <div class="box-h"><div><h2>Leyes reales: ¿qué habrías votado tú?</h2><p class="muted small" style="margin:0">Qué hace cada una, qué dicen sus defensores y sus críticos, y qué votó el Congreso</p></div><span class="tag real">Dato real</span></div>
+    <div id="realLaws"></div>
+  </div>
+
+  <h2 style="margin:28px 0 4px">Ejemplo de cómo funcionaría el proceso completo</h2>
+  <p class="intro">Cada reforma nace de una prioridad ciudadana, se negocia en el Parlamento y solo se aplica si supera el 75% de síes en el Parlamento (voto ponderado) y entre las personas que votan. Un «no» únicamente cuenta si incluye una objeción con propuesta de cambio. Las tres reformas de este ejemplo son inventadas. <span class="tag sim">Simulado</span></p>
+  <div class="cols">
+    <div class="col-side" style="flex:1 1 280px"><ul class="rlist" id="reformList"></ul></div>
+    <div class="col-main">
+      <div class="box">
+        <div class="xs muted" id="rMeta"></div>
+        <h2 id="rTitle" style="font-size:24px;margin:2px 0 14px"></h2>
+        <ol class="steps" id="rSteps" aria-label="Fase de la reforma"></ol>
+        <div class="g2" id="rMeters" style="margin-bottom:18px"></div>
+        <div class="g2">
+          <div>
+            <h3>Qué cambia</h3>
+            <ul id="rChanges" style="margin:0 0 10px;padding-left:20px"></ul>
+            <button type="button" class="link" id="lawBtn">Leer el texto completo de la reforma</button>
+          </div>
+          <div>
+            <h3>Objeciones más repetidas</h3>
+            <div id="rObj"></div>
+          </div>
+        </div>
+        <div class="callout" id="rCost" style="margin:16px 0 0"></div>
+      </div>
+
+      <div class="box hidden" id="liveVotes"></div>
+
+      <div class="box" id="voteBox">
+        <div id="voteForm">
+          <h2>Tu voto</h2>
+          <p class="muted small" id="voteNote">Un voto por persona y ronda. El personal de la biblioteca solo comprueba tu identidad; el voto se guarda sin vínculo con tu DNI.</p>
+          <div class="g2" style="margin:12px 0">
+            <button type="button" class="radio" id="cSi" aria-pressed="false"><span class="dot"></span><span><strong>Sí</strong><br><span class="small muted">Apruebo la reforma. Puedo añadir valoraciones.</span></span></button>
+            <button type="button" class="radio" id="cNo" aria-pressed="false"><span class="dot"></span><span><strong>No, con objeción</strong><br><span class="small muted">Indico qué artículo cambiaría y cómo.</span></span></button>
+          </div>
+          <div class="sub hidden" id="siBox">
+            <div class="field">Valoraciones (opcional) — artículo<span class="hint">Lo que mejorarías o no te gusta, aunque votes sí. No frena la reforma.</span><div class="opts" id="siArts"></div></div>
+            <label class="field" style="margin:0">Comentario<textarea id="siText" placeholder="Ej.: Voto sí, pero las ayudas a jóvenes deberían llegar también a familias monoparentales."></textarea></label>
+          </div>
+          <div class="sub hidden" id="noBox">
+            <div class="field">Artículo que cambiarías<div class="opts" id="noArts"></div></div>
+            <div class="field">En qué sentido<div class="opts" id="senses"></div></div>
+            <label class="field" style="margin:0">Tu propuesta de cambio (obligatoria)<textarea id="noText" placeholder="Ej.: Aplicar el límite también a municipios de más de 20.000 habitantes."></textarea></label>
+          </div>
+          <button type="button" class="btn" id="voteBtn" disabled style="margin-top:14px">Emitir voto</button>
+        </div>
+        <div id="voteDone" class="hidden">
+          <h2>Voto registrado</h2>
+          <p id="voteSummary" style="margin:0"></p>
+        </div>
+      </div>
+
+      <div class="box">
+        <h2>Votación en el Parlamento</h2>
+        <p class="muted small">Cada partido con votos tiene 5 portavoces. Cada portavoz pesa una quinta parte del porcentaje de votos que obtuvo su partido.</p>
+        <div class="tbl"><table>
+          <thead><tr><th>Grupo</th><th class="r">% de votos</th><th class="r">Peso por portavoz</th><th>Voto de los 5 portavoces</th><th class="r">Aporta al sí</th></tr></thead>
+          <tbody id="pBody"></tbody>
+          <tfoot><tr><td colspan="4">Total de síes ponderados</td><td class="r" id="pTotal"></td></tr></tfoot>
+        </table></div>
+        <div class="legend"><span><i class="vsq y"></i> Sí</span><span><i class="vsq o"></i> No con objeción (abre negociación)</span><span><i class="vsq n"></i> No sin objeción (no abre negociación)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRIORIDADES ================= -->
+<section data-view="prioridades" class="hidden">
+  <div class="crumbs">Inicio › Prioridades ciudadanas</div>
+  <h1 style="margin-top:8px">Prioridades ciudadanas</h1>
+  <p class="intro">Elige los problemas que te preocupan y ordénalos. Tu primera prioridad suma 8 puntos, la segunda 7, y así sucesivamente. El problema con más puntos es el primero que el Gobierno debe reformar. <span class="tag sim">Simulado</span></p>
+  <div class="box hidden" id="liveRank"></div>
+  <div class="cols">
+    <div class="col-main box">
+      <h2>Clasificación de ejemplo <span class="tag sim">Simulado</span></h2>
+      <p class="muted small" style="margin-bottom:14px">Porcentaje del total de puntos</p>
+      <div class="tbl"><table><thead><tr><th style="width:44px">#</th><th>Problema</th><th style="width:38%">Puntos</th><th class="r">%</th></tr></thead><tbody id="cBody"></tbody></table></div>
+    </div>
+    <div class="col-side box">
+      <div id="pForm">
+        <h2>Tu clasificación</h2>
+        <div class="field" style="margin-top:12px">Problemas que te preocupan<span class="hint">Púlsalos en orden de importancia. Puedes elegir uno, dos o todos.</span><div class="opts" id="cOpts"></div></div>
+        <div class="field hidden" id="rankWrap">Tu orden<ol class="myrank" id="myRank"></ol></div>
+        <label class="field">Por qué te preocupa tu primera prioridad<textarea id="why" placeholder="Ej.: Pago el 55% de mi sueldo en alquiler."></textarea></label>
+        <label class="field">Posible solución (opcional)<textarea id="sol"></textarea></label>
+        <button type="button" class="btn" id="pBtn" disabled>Guardar mi clasificación</button>
+      </div>
+      <div id="pDone" class="hidden">
+        <h2>Clasificación guardada</h2>
+        <p id="pMsg"></p>
+        <button type="button" class="btn sec" id="pReset">Modificar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BUZÓN ================= -->
+<section data-view="buzon" class="hidden">
+  <div class="crumbs">Inicio › Buzón y denuncias</div>
+  <h1 style="margin-top:8px">Buzón de propuestas y denuncias</h1>
+  <p class="intro">Envía propuestas para la plataforma o cuenta irregularidades que conozcas. Lo que envíes solo lo leo yo: <strong>nunca se publica</strong> y se borra a los 90 días. <span class="tag user">Respuesta real</span></p>
+  <div class="cols">
+    <div class="col-main box">
+      <div id="dForm">
+        <div class="field">Tipo de envío<div class="seg" role="group" aria-label="Tipo de envío"><button type="button" data-mode="denuncia" aria-pressed="true">Denuncia</button><button type="button" data-mode="sugerencia" aria-pressed="false">Sugerencia</button></div></div>
+        <div id="dOnly">
+          <div class="field">Qué quieres contar<div id="dCats" class="g2" style="font-weight:400"></div></div>
+          <div class="callout warn"><strong>No escribas nombres de personas</strong> ni datos que identifiquen a nadie. Esta web no puede investigar. Si quieres que se actúe de verdad, usa los canales oficiales: el <strong>buzón de lucha contra el fraude laboral</strong> de la Inspección de Trabajo (anónimo) o la <a href="https://sede.agenciatributaria.gob.es/Sede/procedimientos/ZZ06.shtml">denuncia tributaria de la Agencia Tributaria</a>.</div>
+        </div>
+        <label class="field"><span id="dLabel">Descripción de los hechos</span><textarea id="dText" style="min-height:140px"></textarea></label>
+        <button type="button" class="btn" id="dBtn" disabled>Enviar</button>
+      </div>
+      <div id="dDone" class="hidden">
+        <h2>Enviado</h2>
+        <p id="dDoneMsg"></p>
+        <p><button type="button" class="btn sec" id="dReset">Hacer otro envío</button></p>
+      </div>
+    </div>
+    <div class="col-side box">
+      <h2>Qué pasa con lo que envías</h2>
+      <ul style="margin:8px 0 0;padding-left:20px">
+        <li>No se pide nombre, correo ni DNI.</li>
+        <li>Solo lo leo yo; la web puede enviar mensajes pero no leerlos.</li>
+        <li>Nunca se publica.</li>
+        <li>Se borra automáticamente a los 90 días.</li>
+      </ul>
+      <h3 style="margin-top:18px">En la plataforma real</h3>
+      <p class="small" style="margin:0">Cada denuncia iría directamente al organismo competente: Inspección de Trabajo, Fiscalía contra la Corrupción o Agencia Tributaria.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CUENTAS ================= -->
+<section data-view="cuentas" class="hidden">
+  <div class="crumbs">Inicio › Cuentas públicas</div>
+  <h1 style="margin-top:8px">Cuentas públicas</h1>
+  <p class="intro">En qué se gasta el dinero público, qué empresas lo cobran y a qué proyecto pertenece cada factura.</p>
+
+  <div class="box">
+    <div class="box-h"><div><h2>Presupuesto del Estado vigente</h2><p class="muted small" style="margin:0">Políticas de gasto, en millones de euros</p></div><span class="tag real">Dato real</span></div>
+    <div class="callout">España no tiene presupuestos nuevos: en 2026 siguen vigentes los <strong>Presupuestos Generales del Estado de 2023</strong>, prorrogados por tercera vez. El Gobierno aprobó un techo de gasto de 216.177 M€ para 2026, pero las cuentas no se han aprobado.</div>
+    <div class="g3" style="margin-bottom:16px">
+      <div class="kpi"><div class="v">485.986 M€</div><div class="l">Gasto total previsto (PGE 2023)</div></div>
+      <div class="kpi"><div class="v">50,1%</div><div class="l">Se va en pensiones, desempleo e intereses de la deuda</div></div>
+      <div class="kpi"><div class="v" id="per100"></div><div class="l">De cada 100 € van a pensiones</div></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Política de gasto</th><th class="r">Millones €</th><th class="r">De cada 100 €</th></tr></thead>
+      <tbody id="budBody"></tbody>
+      <tfoot><tr><td>Total</td><td class="r">485.986</td><td class="r">100,0</td></tr></tfoot>
+    </table></div>
+    <div class="src">Fuentes: <a href="https://www.lamoncloa.gob.es/consejodeministros/resumenes/Documents/2022/041022-Presentacion_PL_PGE_2023.pdf">Presentación del PGE 2023, La Moncloa</a> · <a href="https://valenciaplaza.com/pensiones-paro-intereses-deuda-comen-mas-5-de-cada-10-euros-gasto-pge">Valencia Plaza (Europa Press)</a> · <a href="https://www.iefamiliar.com/wp-content/uploads/2022/10/Las-claves-de-PGE-2023_.pdf">IEF, claves del PGE 2023</a> · <a href="https://www.estrategiasdeinversion.com/actualidad/noticias/otras/el-gobierno-elevara-un-114-el-gasto-en-pensiones-n-560519">Estrategias de Inversión</a> · <a href="https://www.vozpopuli.com/economia/macroeconomia/gasto-record-2023-solo-900-millones-ayudas-directas.html">Vozpópuli (gasto total)</a> · <a href="https://forbes.es/?p=852009">Forbes: prórroga para 2026</a> · <a href="https://forbes.es/?p=829920">Forbes: techo de gasto 2026</a>. «Resto» es la diferencia entre el total y las políticas listadas.</div>
+  </div>
+
+  <div class="box">
+    <div class="box-h"><div><h2>Contratos y facturas</h2><p class="muted small" style="margin:0">Cada factura indica a qué política, proyecto y ley pertenece, y para qué se paga</p></div><span class="tag sim">Simulado</span></div>
+    <label class="field" style="max-width:340px">Buscar empresa, organismo o proyecto<input type="search" id="q"></label>
+    <div class="tbl"><table>
+      <thead><tr><th>Factura</th><th>Empresa</th><th>Para qué</th><th>Política de gasto</th><th class="r">Importe</th></tr></thead>
+      <tbody id="ctBody"></tbody>
+    </table></div>
+    <p class="muted small hidden" id="ctEmpty" style="margin-top:10px"></p>
+  </div>
+
+  <div class="box">
+    <div class="box-h"><div><h2>Cargos públicos: sueldo y gastos</h2><p class="muted small" style="margin:0">Cada gasto pagado con dinero público, con su factura y el motivo</p></div><span class="tag sim">Simulado</span></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Cargo</th><th>Nombre</th><th class="r">Sueldo bruto anual</th><th class="r">Gastos de octubre</th><th></th></tr></thead>
+      <tbody id="ofBody"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ================= PODER ECONÓMICO ================= -->
+<section data-view="poder" class="hidden">
+  <div class="crumbs">Inicio › Poder económico</div>
+  <h1 style="margin-top:8px">Poder económico e influencia</h1>
+  <p class="intro">Patrimonio de las mayores fortunas, impuestos que pagan las grandes empresas, bienes de los cargos públicos, sus reuniones con grupos de interés y los compromisos que obligan a España con la UE, la OTAN y Estados Unidos.</p>
+
+  <div class="box">
+    <div class="box-h"><div><h2>Mayores fortunas de España</h2><p class="muted small" style="margin:0">Lista Forbes España 2025: patrimonio, dónde reside cada persona y a través de qué sociedad tiene su fortuna</p></div><span class="tag real">Dato real</span></div>
+    <div class="tbl"><table>
+      <thead><tr><th>#</th><th>Persona</th><th>Origen</th><th class="r">Patrimonio</th><th>Dónde reside y tributa</th><th>Cómo tiene la fortuna</th><th>Impuestos personales</th></tr></thead>
+      <tbody id="fortBody"></tbody>
+    </table></div>
+    <div class="callout warn" style="margin-top:14px">Lo que paga cada persona en IRPF, Patrimonio o Solidaridad <strong>no es público</strong>: lo protege el secreto tributario (artículo 95 de la Ley General Tributaria). Publicarlo, como propone esta plataforma, exigiría cambiar esa ley.</div>
+    <div class="src">Fuentes: <a href="https://www.diaridetarragona.com/economia/244130/100-mayores-fortunas-espana-aumentan-riqueza-concentran-258-870-millones-euros.html">Diari de Tarragona (Forbes España 2025)</a> · <a href="https://www.bolsamania.com/noticias_print/empresas/economia--amancio-ortega-su-hija-sandra-y-rafael-del-pino-las-tres-mayores-fortunas-de-espana-segun-forbes--8362892.html">Europa Press (residencias, Forbes 2021)</a> · <a href="https://forbes.es/forbes-ricos/124177/la-tabla-de-la-evolucion-de-la-fortuna-de-los-mas-ricos-en-espana-desde-2019/">Forbes (Escotet, A Coruña)</a> · <a href="https://forbes.es/?p=986792">Forbes (Rosp Corunna)</a> · <a href="https://www.elobservador.com.uy/espana/economia-y-finanzas/con-amancio-ortega-la-cabeza-la-fortuna-los-milmillonarios-espana-alcanza-maximos-historicos-n6042069/amp">El Observador (Rijn Capital)</a> · <a href="https://www.cronista.com/espana/actualidad-es/la-estrategia-fiscal-de-amancio-ortega-para-pagar-un-20-menos-de-impuestos-totalmente-legal">El Cronista (Pontegadea)</a> · <a href="https://www.economistjurist.es/?p=112793">Economist &amp; Jurist (Mercadona)</a> · <a href="https://alicanteplaza.es/alicanteplaza/juanroigbajaalquintopuestodelasgrandesfortunasespaolascon3900millones1">Alicante Plaza (Roig)</a></div>
+  </div>
+
+  <div class="box">
+    <div class="box-h"><div><h2>¿Pagas tú más que una gran empresa?</h2><p class="muted small" style="margin:0">Pon tus datos y compáralos con lo que pagan las grandes empresas sobre lo que ganan</p></div><span class="tag real">Dato real</span></div>
+
+    <div class="cols" style="gap:24px">
+      <div class="col-side" style="flex:1 1 300px">
+        <div class="field">Soy<div class="seg" role="group" aria-label="Tipo de trabajador"><button type="button" data-who="asal" aria-pressed="true">Asalariado</button><button type="button" data-who="auto" aria-pressed="false">Autónomo</button></div></div>
+        <div id="fAsal">
+          <label class="field">Sueldo bruto mensual (€)<input type="number" id="inGross" value="2480" min="0" step="10" inputmode="decimal"></label>
+          <label class="field">IRPF que te retienen (%)<span class="hint">Aparece en tu nómina</span><input type="number" id="inIrpf" value="14.6" min="0" max="60" step="0.1" inputmode="decimal"></label>
+          
+        </div>
+        <div id="fAuto" class="hidden">
+          <label class="field">Rendimiento neto mensual (€)<span class="hint">Lo que facturas menos los gastos</span><input type="number" id="inNet" value="2000" min="0" step="10" inputmode="decimal"></label>
+          
+          <label class="field">IRPF (%)<span class="hint">El de tu última declaración o tus pagos trimestrales</span><input type="number" id="inIrpfA" value="15" min="0" max="60" step="0.1" inputmode="decimal"></label>
+        </div>
+      </div>
+      <div class="col-main">
+        <div class="kpi" style="margin-bottom:14px;max-width:360px"><div class="v" id="youTax"></div><div class="l" id="youTaxL"></div></div>
+        <h3>Impuesto sobre lo que se gana</h3>
+        <p class="small muted" style="margin:0 0 8px">Tu IRPF frente al Impuesto de Sociedades de la empresa sobre su beneficio. Es la comparación más justa: los dos son el impuesto sobre la renta de cada uno.</p>
+        <div class="tbl"><table><thead><tr><th>Quién</th><th class="r">Ganó antes de impuestos</th><th class="r">Pagó</th><th class="r">%</th><th style="width:26%"></th><th>Frente a ti</th></tr></thead><tbody id="cmp1"></tbody></table></div>
+        
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px" id="verdict"></div>
+    <div class="callout warn">
+      <strong>Lo que estos números no enseñan.</strong>
+      <ul style="margin:6px 0 0;padding-left:20px">
+        <li><strong>El beneficio declarado en otros países.</strong> En 2023 Inditex declaró 1.618 M€ de beneficio en España, pero también 824 M€ en Países Bajos y 525 M€ en Suiza, donde se tributa menos.</li>
+        <li><strong>Lo que pagan los dueños.</strong> Los grandes accionistas cobran sobre todo dividendos a través de sociedades como Pontegadea o Rosp Corunna, que están exentas en gran parte de tributar por esos dividendos. Lo que pagan personalmente no es público.</li>
+        <li><strong>Las empresas que no publican datos.</strong> La media del IBEX (16%) esconde empresas que pagan bastante más y otras que pagan mucho menos.</li>
+              </ul>
+    </div>
+    <div class="src">Fuentes: <a href="https://talent24h.okdiario.com/mercadona-aporta-3-110-millones-en-impuestos-y-juan-roig-lanza-un-mensaje-sobre-los-servicios-publicos/">Mercadona 2025 (OKDiario)</a> · <a href="https://www.elindependiente.com/economia/2026/03/10/mercadona-beneficio-ventas-2025/">El Independiente</a> · <a href="https://forbes.es/?p=427176">Inditex, beneficio por países 2023 (Forbes)</a> · <a href="https://www.cronista.com/espana/actualidad-es/la-estrategia-fiscal-de-amancio-ortega-para-pagar-un-20-menos-de-impuestos-totalmente-legal">Inditex, Sociedades en España (El Cronista, CNMV)</a> · <a href="https://www.caixabank.com/deployedfiles/caixabank_com/Estaticos/PDFs/Sostenibilidad/InformeFiscal_2025_ESP.pdf">CaixaBank, Informe fiscal 2025</a> · <a href="https://www.eldiario.es/economia/caixabank-gana-1-8-2025-logra-nuevo-beneficio-record-5-891-millones-euros_1_12948762.amp.html">elDiario.es</a> · <a href="https://www.bolsamania.com/noticias/economia/economia--los-impuestos-soportados-del-ibex-35-suben-un-12-en-2025-impulsados-por-sociedades-y-empleo--23122523.html">IBEX 35 (PwC)</a> · <a href="https://upta.es/wp-content/uploads/2026/03/RES-ORDEN-COTIZACION-2026-RETA.pdf">Cuotas de autónomos 2026 (UPTA, orden de cotización)</a> · <a href="https://calculadornomina.es/bruto-neto/2600-euros-brutos-mes-14-pagas/">Cotización de la empresa (Calculadora de nóminas)</a>. Las cifras con ≈ están calculadas a partir de las publicadas.</div>
+  </div>
+
+  <div class="box">
+    <div class="box-h"><div><h2>Bienes de los cargos públicos</h2><p class="muted small" style="margin:0">Viviendas, empresas y participaciones, y trabajo antes del cargo</p></div><span class="tag sim">Simulado</span></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Cargo</th><th>Nombre</th><th class="r">Inmuebles</th><th class="r">Valor de inmuebles</th><th class="r">Empresas y acciones</th><th>Antes del cargo</th><th></th></tr></thead>
+      <tbody id="bienesBody"></tbody>
+    </table></div>
+  </div>
+
+  <div class="box">
+    <div class="box-h"><div><h2>Reuniones del Gobierno con grupos de interés</h2><p class="muted small" style="margin:0">Cada reunión con su acta y los documentos entregados</p></div><span class="tag sim">Simulado</span></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Fecha</th><th>Cargo</th><th>Con quién</th><th>Asunto</th><th>Acta</th></tr></thead>
+      <tbody id="agBody"></tbody>
+    </table></div>
+  </div>
+
+  <div class="box">
+    <div class="box-h"><div><h2>Compromisos con la UE, la OTAN y Estados Unidos</h2><p class="muted small" style="margin:0">Qué obliga a España desde fuera, cuánto supone y el documento oficial que lo recoge</p></div><span class="tag real">Dato real</span></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Con quién</th><th>Compromiso</th><th>Cifras</th><th>Documento oficial</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Unión Europea</strong></td><td>Presupuesto común: España aporta dinero y recibe fondos.</td><td>Previsión del PGE 2023: España recibe 31.857 M€ y queda con un saldo a favor de 13.815 M€.</td><td><a href="https://www.congreso.es/docu/pge2023/pge_2023-web/PGE-ROM/doc/3/4/N_23_A_A_4_1.PDF">Anexo de flujos financieros España–UE (PGE 2023)</a></td></tr>
+        <tr><td><strong>Unión Europea</strong></td><td>Reglas fiscales (Reglamento UE 2024/1263): límite al crecimiento del gasto que fija el Consejo de la UE.</td><td>En 2024 el gasto computable creció un 4,1%, por debajo del 5,3% recomendado.</td><td><a href="https://www.hacienda.gob.es/CDI/Estabilidad%20Presupuestaria/PlanFiscalEstructural/Informe-progreso-2025.pdf">Informe de progreso 2025 enviado a Bruselas (Hacienda)</a></td></tr>
+        <tr><td><strong>OTAN</strong></td><td>Gasto en defensa mínimo del 2% del PIB (objetivo fijado en 2014).</td><td>España pasó de 22.693 M€ en 2024 a 33.123 M€ en 2025 (2% del PIB).</td><td><a href="https://www.eldebate.com/uploads/files/2026/07/06/060726-informe-otan-julio-2026.pdf">Informe sobre el cumplimiento con la OTAN (julio 2026)</a></td></tr>
+        <tr><td><strong>OTAN</strong></td><td>Cumbre de La Haya (25/06/2025): 5% del PIB en 2035, del que 3,5% en defensa básica, con revisión en 2029.</td><td>El texto se suavizó para que España lo apoyara. España sostiene que cumple los objetivos de capacidades con el 2,1%.</td><td><a href="https://augengeradeaus.net/wp-content/uploads/2025/06/20250625_NATO_The_Hague_Summit_Declaration.pdf">Declaración de la Cumbre de La Haya (texto íntegro, inglés)</a></td></tr>
+        <tr><td><strong>Estados Unidos</strong></td><td>Convenio de Cooperación para la Defensa de 1 de diciembre de 1988. Se renueva automáticamente cada año si ninguna parte lo denuncia.</td><td>Uso por fuerzas de EE. UU. de las bases de Rota (Cádiz) y Morón (Sevilla), que siguen bajo soberanía española.</td><td><a href="https://www.boe.es/eli/es/ai/1988/12/01/(1)">Convenio en el BOE</a><br><a href="https://www.boe.es/eli/es/ai/2015/06/17/(1)">Tercer Protocolo de enmienda (2015) en el BOE</a></td></tr>
+      </tbody>
+    </table></div>
+    <div class="src">Fuentes de las cifras: <a href="https://www.estrategiasdeinversion.com/actualidad/noticias/otras/espana-sera-receptor-neto-de-la-ue-en-2023-con-n-561329">Estrategias de Inversión</a> · <a href="https://es.ara.cat/politica/otan-estima-espana-alcanzado-2-pib-defensa_1_5480988.html">Ara (datos OTAN)</a> · <a href="https://www.polskieradio.pl/395/7785/Artykul/3541089,nato-seals-draft-deal-on-5-gdp-defense-spending-target-after-spain-relents">Polskie Radio (Reuters)</a> · <a href="https://theobjective.com/espana/politica/2025-06-25/sanchez-espana-defensa-rutte/">The Objective</a> · <a href="https://www.eldebate.com/espana/20260522/espana-estados-unidos-renuevan-convenio-sobre-conjunto-bases-rota-moron_420640.html">El Debate (renovación del convenio, 2026)</a></div>
+  </div>
+</section>
+
+<!-- ================= COMUNICACIONES ================= -->
+<section data-view="comunicaciones" class="hidden">
+  <div class="crumbs">Inicio › Comunicaciones</div>
+  <h1 style="margin-top:8px">Comunicaciones de cargos públicos</h1>
+  <p class="intro">Todo correo, mensaje y llamada hecho con medios de trabajo de un cargo público se publica 30 días después. Se ocultan los datos de ciudadanos particulares. <span class="tag sim">Simulado</span></p>
+  <div class="cols">
+    <div class="col-main box">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:8px">
+        <div class="seg" role="group" aria-label="Tipo" id="comTypes"></div>
+        <label class="field" style="margin:0;flex:0 1 280px">Buscar<input type="search" id="cq" placeholder="Cargo, persona o asunto"></label>
+      </div>
+      <div id="comList"></div>
+      <p class="muted small hidden" id="comEmpty" style="margin-top:10px">No hay comunicaciones que coincidan.</p>
+    </div>
+    <div class="col-side box">
+      <h2>Qué se oculta</h2>
+      <ul style="margin:8px 0 14px;padding-left:20px">
+        <li>Nombre, dirección y teléfono de ciudadanos particulares.</li>
+        <li>Identidad de denunciantes y víctimas.</li>
+        <li>Datos de salud y de menores.</li>
+      </ul>
+      <h3>Excepciones</h3>
+      <p class="small">Seguridad nacional, investigaciones policiales en curso y negociaciones internacionales abiertas pueden retrasarse hasta 4 años, nunca borrarse. Las decide un consejo de 5 jueces y 4 ciudadanos elegidos por sorteo, y se publica quién pidió cada excepción.</p>
+      <h3>Móvil personal</h3>
+      <p class="small" style="margin:0">Usar el teléfono o el correo personal para asuntos del cargo está prohibido y sancionado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GLOSARIO ================= -->
+<section data-view="glosario" class="hidden">
+  <div class="crumbs">Inicio › Glosario</div>
+  <h1 style="margin-top:8px">Glosario</h1>
+  <p class="intro">Qué significa cada término que aparece en esta web. Cuando una ley lo define, se copia el texto literal y se enlaza al BOE. Cuando la definición viene de un diccionario oficial (RAE), se resume y se enlaza, porque esos textos no se pueden reproducir enteros. Los términos propios de esta propuesta se marcan como tales. En el resto de páginas, las palabras subrayadas con puntos se pueden pulsar.</p>
+  <div class="box">
+    <label class="field" style="max-width:360px">Buscar término<input type="search" id="gq" placeholder="Ej.: mayoría absoluta"></label>
+    <dl id="glossList" style="margin:0"></dl>
+  </div>
+</section>
+
+</main>
+
+<div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="mbox">
+    <div class="mhead"><div><div class="xs muted" id="mKicker"></div><h2 id="mTitle" style="font-size:22px;margin:2px 0 0"></h2></div><button type="button" class="mclose" id="mClose" aria-label="Cerrar">✕</button></div>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <span>Voz del Pueblo · Una nueva democracia, del pueblo para el pueblo: abierta a escuchar, debatir y mejorar para que vivamos mejor. No es una web oficial ni pertenece a ningún partido.</span>
+  <span>Inventados: personas, partidos, contratos y comunicaciones. Reales y con fuente: fortunas, impuestos de empresas, presupuesto y compromisos internacionales.</span>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+/* =====================================================================
+   CONFIGURACIÓN DE SUPABASE
+   Pega aquí la URL de tu proyecto y la clave pública (anon / publishable).
+   Si se dejan vacías, la web funciona en modo demostración y no guarda nada.
+   ===================================================================== */
+const SUPABASE_URL = 'https://nuccideeghprdbxzbhka.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_b5DjDT6k72raECvxkWx_nQ_JFuV2BW5';
+
+const $ = (id) => document.getElementById(id);
+let db = null;
+try { if (SUPABASE_URL && SUPABASE_KEY && window.supabase) db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch (e) { db = null; }
+const LIVE = !!db;
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+const USER = '<span class="tag user">Respuesta real</span>';
+const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pct = (n, d) => n.toFixed(d === undefined ? 1 : d).replace('.', ',') + '%';
+const num = (n) => n.toLocaleString('es-ES');
+const eur = (n, d) => n.toLocaleString('es-ES', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }) + ' €';
+const SIM = '<span class="tag sim">Simulado</span>';
+
+/* =====================================================================
+   DATOS REALES (con fuente en la página)
+   ===================================================================== */
+// PGE 2023 prorrogados en 2026. Millones de euros.
+const BUDGET_TOTAL = 485986;
+const BUDGET = [
+  ['Pensiones',190687],
+  ['Intereses de la deuda',31275],
+  ['Desempleo',21278],
+  ['I+D+i',16328],
+  ['Defensa',12306],
+  ['Industria y energía',11600],
+  ['Agricultura, pesca y alimentación',8868],
+  ['Fomento del empleo',8029],
+  ['Sanidad',7049],
+  ['Acceso a la vivienda',3472],
+  ['Política exterior y cooperación',2426],
+  ['Justicia',2291]
+];
+const BUD_RESTO = BUDGET_TOTAL - BUDGET.reduce((a,b) => a + b[1], 0);
+const BUD = (name) => { const r = BUDGET.find((b) => b[0] === name); return r ? r[1] : BUD_RESTO; };
+
+// Forbes España 2025 + residencia y sociedad
+const FORTUNES = [
+  ['1','Amancio Ortega','Inditex',109900,'Galicia (A Coruña)','Pontegadea, su sociedad de inversión (beneficio neto de 9.322 M€ en 2024)'],
+  ['2','Sandra Ortega Mera','Inditex (accionista)',10000,'Galicia','Rosp Corunna: 5,05% de Inditex y 5,15% de PharmaMar'],
+  ['3','Rafael del Pino y Calvo-Sotelo','Ferrovial',8000,'Comunidad de Madrid','20,45% de Ferrovial a través de Rijn Capital, sociedad en Países Bajos. Ferrovial trasladó su sede a Países Bajos en 2023'],
+  ['4','Juan Roig','Mercadona',7900,'Comunitat Valenciana','Controla Mercadona junto a Hortensia Herrero (78,9% entre ambos)'],
+  ['5','Juan Carlos Escotet','Abanca',6200,'Galicia (A Coruña)','Presidente y principal accionista de Abanca']
+];
+
+// [quién, año, ganó antes de impuestos, pagó, % impuesto sobre beneficio, % todo lo que soporta (null si no se publica)]
+const COMPANIES = [
+  ['Mercadona','2025','≈ 2.198 M€','469 M€',21.3,28.0,'Sociedades (469 M€) + otros impuestos y tasas (202 M€) sobre ≈ 2.400 M€ de beneficio antes de pagarlos. No incluye la Seguridad Social que paga por su plantilla, igual que tu cifra no incluye la que paga tu empresa por ti'],
+  ['Inditex (solo España)','2023','1.618 M€','≈ 334 M€',20.6,null,''],
+  ['CaixaBank (grupo)','2025','8.674 M€','≈ 2.783 M€',32.1,null,'Incluye el gravamen temporal a la banca. Su «tipo impositivo total» publicado mezcla conceptos que no se pueden separar'],
+  ['Media del IBEX 35 en España','2025','—','—',16.0,null,'']
+];
+
+/* =====================================================================
+   DATOS SIMULADOS (personas, partidos y empresas inventados)
+   ===================================================================== */
+const PHASES = ['El pueblo se queja','El Gobierno redacta','Parlamento negocia','El pueblo vota','Se aplica'];
+const PARTIES = [['Partido A',33],['Partido B',30],['Partido C',15],['Partido D',12],['Partido E',0.4],['Resto (14 partidos)',9.6]];
+
+const OFFICIALS = [
+  { role:'Presidencia del Gobierno', name:'Marta Ibáñez Solé', salary:92400,
+    exp:[['03/10/2026','Tren Madrid–Lleida, ida y vuelta','Operador ferroviario',186.40,'Reunión con alcaldes de Ponent sobre la declaración de zonas tensionadas (acta AC-2026-4190)'],
+         ['03/10/2026','Comida de trabajo, 6 personas','Restaurante en Lleida',214.80,'Misma reunión con alcaldes de Ponent'],
+         ['21/10/2026','Taxi Moncloa–sede de Energías del Atlántico','Taxi',22.60,'Reunión sobre el precio de la luz (acta AC-2026-4351)']] },
+  { role:'Ministerio de Vivienda', name:'Jordi Casals Prat', salary:82700,
+    exp:[['08/10/2026','Kilometraje coche oficial Madrid–Lleida','Parque Móvil del Estado',96.30,'Visita a las obras de 120 viviendas públicas en Cappont (factura F-2026-08812)'],
+         ['24/10/2026','Sala de reuniones','Hotel en Madrid',310.00,'Reunión con la Asociación Ibérica de Promotores (acta AC-2026-4387)']] },
+  { role:'Ministerio de Hacienda', name:'Elena Robles Díaz', salary:82700,
+    exp:[['14/10/2026','Tren Madrid–Sevilla','Operador ferroviario',152.20,'Consejo de Política Fiscal con las comunidades autónomas'],
+         ['14/10/2026','Hotel, 1 noche','Hotel en Sevilla',138.00,'Mismo Consejo de Política Fiscal']] },
+  { role:'Portavoz parlamentaria · Partido A', name:'Andrés Molina Ruiz', salary:73200,
+    exp:[['01/10/2026','Alojamiento en Madrid (diputado de fuera de Madrid)','Indemnización fija mensual',1823.00,'Asistencia a plenos y comisiones'],
+         ['15/10/2026','Vuelos Madrid–Málaga, 4 trayectos','Aerolínea',612.40,'Desplazamiento semanal a su circunscripción']] },
+  { role:'Portavoz parlamentaria · Partido E', name:'Nerea Gil Etxeberria', salary:49600,
+    exp:[['06/10/2026','Tren Bilbao–Madrid','Operador ferroviario',124.60,'Pleno de la Ronda 2 de la Ley de Vivienda'],
+         ['20/10/2026','Tren Bilbao–Madrid','Operador ferroviario',124.60,'Negociación del artículo 4 con el Partido A'],
+         ['20/10/2026','Pensión en Madrid, 3 noches','Hostal en Madrid',390.80,'Misma negociación']] }
+];
+
+const REFORMS = [
+  { code:'Proyecto de Ley 14/2026 (simulado)', title:'Ley de Vivienda Asequible', origin:'Prioridad nº1: Vivienda', rank:1, phase:3, round:'Ronda 2',
+    pueblo:64.2, puebloSub:'6.104.233 votos · la ronda cierra el 9 de noviembre',
+    cost:3200, costPolicy:'Acceso a la vivienda',
+    changes:['20.000 viviendas públicas de alquiler al año','Límite a la subida del alquiler en zonas tensionadas','Ayuda de hasta 300 € al mes a menores de 35 años','Recargo del 150% en el IBI a viviendas vacías más de 2 años'],
+    articles:['Art. 2 — Parque público','Art. 4 — Límite del alquiler','Art. 7 — Ayudas a jóvenes','Art. 9 — Viviendas vacías'],
+    objections:[['Art. 4','El límite se queda corto fuera de las capitales','21%'],['Art. 9','Falta definir qué es una vivienda vacía','9%'],['Art. 7','Incluir a mayores de 35 con hijos','6%']],
+    votes:[[5,0,0],[5,0,0],[4,1,0],[2,3,0],[5,0,0],[2,2,1]],
+    preamble:'La vivienda es la primera prioridad ciudadana en la plataforma. Esta segunda versión incorpora lo negociado en la Ronda 1 con los grupos C y D.',
+    law:[['Artículo 1. Objeto','Garantizar una vivienda digna a un precio que no supere el 30% de los ingresos netos del hogar.'],
+      ['Artículo 2. Parque público','El Estado construirá o rehabilitará al menos 20.000 viviendas al año para alquiler asequible. No podrán venderse a fondos de inversión.'],
+      ['Artículo 4. Límite del alquiler','En zonas tensionadas, la renta de un contrato nuevo no podrá superar la del anterior actualizada con el IPC. Un municipio podrá pedir la declaración cuando el alquiler medio supere el 30% de la renta media.'],
+      ['Artículo 7. Ayudas a jóvenes','Menores de 35 años con ingresos inferiores a tres veces el IPREM recibirán hasta 300 € al mes durante un máximo de 3 años.'],
+      ['Artículo 9. Viviendas vacías','Las viviendas vacías más de 2 años sin causa justificada pagarán un recargo del 150% en el IBI. Son causas justificadas la obra, el traslado laboral y el litigio.'],
+      ['Artículo 11. Financiación','3.200 M€ anuales durante 10 años: 60% del Estado y 40% de las comunidades autónomas.']] },
+  { code:'Proyecto de Ley 7/2026 (simulado)', title:'Horas extra y registro horario', origin:'Prioridad nº3: Empleo y salarios', rank:3, phase:2, round:'Ronda 1',
+    pueblo:null, puebloSub:'Pasará a votación popular cuando supere el 75% en el Parlamento',
+    cost:140, costPolicy:'Fomento del empleo',
+    changes:['Registro horario digital que no se puede modificar','Sanción de 1.000 a 10.000 € por cada trabajador con horas extra sin pagar','La Inspección puede consultar el registro a distancia','Aplicación pública y gratuita para empresas de menos de 10 trabajadores'],
+    articles:['Art. 1 — Registro digital','Art. 3 — Sanciones','Art. 5 — Acceso de la Inspección','Art. 6 — Pymes'],
+    objections:[['Art. 6','Más plazo de adaptación para pymes','14,8%'],['Art. 3','Sanción proporcional a la facturación','7,2%']],
+    votes:[[5,0,0],[3,2,0],[5,0,0],[0,4,1],[5,0,0],[2,2,1]],
+    preamble:'Responde a la tercera prioridad ciudadana y a las denuncias por horas extra recibidas en el buzón.',
+    law:[['Artículo 1. Registro digital','Todas las empresas registrarán la jornada en un sistema digital que no permita modificar los datos una vez guardados.'],
+      ['Artículo 3. Sanciones','Cada trabajador afectado por horas extra no pagadas es una infracción independiente, sancionada con entre 1.000 y 10.000 €.'],
+      ['Artículo 5. Acceso de la Inspección','La Inspección de Trabajo podrá consultar el registro a distancia, sin aviso previo, si existe una denuncia.'],
+      ['Artículo 6. Pymes','Las empresas de menos de 10 trabajadores tendrán 12 meses de adaptación y una aplicación pública gratuita.']] },
+  { code:'Ley 9/2026 (simulada)', title:'Transparencia de cargos públicos', origin:'Prioridad nº5: Corrupción', rank:5, phase:4, round:'Aprobada',
+    pueblo:86.5, puebloSub:'7.412.890 votos · en vigor desde el 1 de octubre',
+    cost:22, costPolicy:'Resto de políticas',
+    changes:['Sueldo, patrimonio y gastos publicados cada mes','Cada gasto con su factura y su motivo','Seguimiento del patrimonio 5 años después del cargo','Comunicaciones de trabajo públicas a los 30 días'],
+    articles:['Art. 1 — Publicación','Art. 2 — Facturas','Art. 4 — Seguimiento','Art. 7 — Comunicaciones'],
+    objections:[['Art. 4','Ampliar el seguimiento a familiares directos','5%']],
+    votes:[[5,0,0],[5,0,0],[5,0,0],[3,2,0],[5,0,0],[4,1,0]],
+    preamble:'Quien gestiona dinero público rinde cuentas en público. Aprobada con el 86,5% del voto popular.',
+    law:[['Artículo 1. Publicación','Todo cargo electo o de libre designación publicará cada mes su sueldo, su patrimonio y los gastos pagados con dinero público.'],
+      ['Artículo 2. Facturas','Cada gasto irá con su factura, el proveedor, el importe y el motivo.'],
+      ['Artículo 4. Seguimiento','El patrimonio se seguirá publicando durante 5 años tras el cese.'],
+      ['Artículo 7. Comunicaciones','Los correos, mensajes y llamadas hechos con medios de trabajo se publicarán a los 30 días, ocultando los datos de ciudadanos particulares.']] }
+];
+
+const CONCERNS = [['Vivienda',31.4],['Economía y coste de vida',22.1],['Empleo y salarios',14.8],['Sanidad',11.2],['Corrupción',8.6],['Extranjería e inmigración',5.3],['Racismo y discriminación',3.4],['Educación',3.2]];
+
+const DCATS = [['laboral','Abusos laborales','Horas extra sin pagar, contratos fraudulentos, trabajo sin alta'],['politico','Cargo público','Sobornos, enchufes, uso indebido de dinero público'],['fraude','Fraude o blanqueo','Facturas falsas, dinero no declarado'],['otro','Otro','Cualquier otra irregularidad']];
+
+const CONTRACTS = [
+  { inv:'F-2026-08812', co:'Construcciones Segrià S.L.', cif:'B-00000101', org:'Ministerio de Vivienda', what:'120 viviendas públicas de alquiler en Cappont (Lleida), fase 1', policy:'Acceso a la vivienda', project:'Plan de vivienda pública de Ponent', law:'Programa estatal de vivienda 2026', why:'Construir vivienda de alquiler asequible en un barrio donde el alquiler medio supera el 30% de la renta media.', total:14250000, date:'14/08/2026', paid:'Pagada el 12/09/2026',
+    lines:[['Estructura y cimentación',0.42],['Fachadas y cubiertas',0.31],['Instalaciones de agua, electricidad y climatización',0.27]] },
+  { inv:'F-2026-07745', co:'Datanorte Sistemas S.A.', cif:'A-00000102', org:'Ministerio de Hacienda', what:'Desarrollo y mantenimiento del portal de transparencia', policy:'Resto de políticas', project:'Portal Voz del Pueblo', law:'Ley 9/2026 de Transparencia de cargos públicos', why:'Publicar sueldos, patrimonio, gastos y comunicaciones, como exige la Ley 9/2026.', total:1840000, date:'31/07/2026', paid:'Pagada el 29/08/2026',
+    lines:[['Desarrollo y mantenimiento (12 meses)',0.55],['Auditoría externa del sistema de voto',0.25],['Soporte técnico en puntos de voto',0.20]] },
+  { inv:'F-2026-07311', co:'Aplicaciones Públicas Norte S.L.', cif:'B-00000103', org:'Ministerio de Trabajo', what:'Aplicación gratuita de registro horario para pymes', policy:'Fomento del empleo', project:'Registro horario digital', law:'Proyecto de Ley 7/2026 (contrato condicionado a su aprobación)', why:'Que las empresas de menos de 10 trabajadores puedan cumplir el registro sin coste.', total:612000, date:'22/07/2026', paid:'Retenida hasta que se apruebe la ley',
+    lines:[['Diseño y desarrollo',0.7],['Pruebas con 200 pymes',0.3]] },
+  { inv:'F-2026-06630', co:'Limpiezas Ebro S.L.', cif:'B-00000104', org:'Congreso de los Diputados', what:'Limpieza de edificios, 12 meses', policy:'Resto de políticas', project:'Funcionamiento del Congreso', law:'Presupuesto ordinario del Congreso', why:'Servicio básico de los edificios del Congreso.', total:2115400, date:'30/06/2026', paid:'Pagada el 28/07/2026',
+    lines:[['Limpieza diaria de 4 edificios',0.86],['Limpiezas extraordinarias',0.14]] },
+  { inv:'F-2026-05517', co:'Ingeniería Ferroviaria del Nordeste S.A.', cif:'A-00000105', org:'Ministerio de Transportes', what:'Renovación de vía Lleida–Manresa, tramo Cervera–Calaf', policy:'Resto de políticas', project:'Cercanías y regionales de Cataluña', law:'Plan de inversiones ferroviarias', why:'Reducir averías y el tiempo de viaje en una línea con frecuentes incidencias.', total:38900000, date:'29/05/2026', paid:'Pagada el 30/06/2026',
+    lines:[['Renovación de vía',0.64],['Señalización y seguridad',0.24],['Dirección de obra',0.12]] },
+  { inv:'F-2026-04981', co:'Análisis Salud Consulting S.L.', cif:'B-00000106', org:'Ministerio de Sanidad', what:'Estudio de las listas de espera', policy:'Sanidad', project:'Plan de reducción de listas de espera', law:'Prioridad ciudadana nº4: Sanidad', why:'Saber dónde y por qué se acumulan las esperas antes de redactar la reforma de sanidad.', total:312000, date:'20/05/2026', paid:'Pagada el 18/06/2026',
+    lines:[['Recogida de datos en 17 comunidades',0.6],['Informe y propuestas',0.4]] },
+  { inv:'F-2026-04410', co:'Mantenimientos Terrestres Ibéricos S.A.', cif:'A-00000107', org:'Ministerio de Defensa', what:'Mantenimiento de 340 vehículos del Ejército de Tierra', policy:'Defensa', project:'Mantenimiento de material', law:'Compromiso del 2% del PIB con la OTAN', why:'Mantener operativo el material ya comprado.', total:9480000, date:'12/05/2026', paid:'Pagada el 10/06/2026',
+    lines:[['Mano de obra',0.45],['Recambios',0.40],['Transporte a talleres',0.15]] }
+];
+
+const BIENES = [
+  { o:0, props:[['Vivienda habitual','Madrid','100%',385000],['Piso','Lleida','50%',96000],['Apartamento','Salou','100%',142000]], cos:[['Inversiones Solé Ibáñez S.L.','Sociedad patrimonial familiar','40%',61000]], before:'Abogada laboralista (2004–2019)' },
+  { o:1, props:[['Vivienda habitual','Lleida','50%',118000],['Local comercial','Lleida','100%',74000]], cos:[['Acciones de una eléctrica cotizada','Bolsa','<0,01%',23500]], before:'Arquitecto municipal (2008–2023)' },
+  { o:2, props:[['Vivienda habitual','Madrid','100%',640000],['Casa','Marbella','100%',490000],['Piso alquilado','Madrid','100%',310000],['Piso alquilado','Madrid','100%',285000]], cos:[['Fondo de inversión internacional','Fondo','—',210000],['Robles & Asociados S.L.','Asesoría fiscal; cedida al cónyuge al entrar en el cargo','0% (antes 60%)',0]], before:'Socia de una asesoría fiscal con clientes del IBEX 35 (2009–2022)' },
+  { o:3, props:[['Vivienda habitual','Málaga','100%',212000],['Plaza de garaje','Málaga','100%',18000]], cos:[['Hostelería Molina S.L.','2 restaurantes','25%',44000]], before:'Empresario de hostelería' },
+  { o:4, props:[['Vivienda habitual (con hipoteca)','Bilbao','50%',96000]], cos:[], before:'Enfermera en la sanidad pública' }
+];
+
+const AGENDA = [
+  ['28/10/2026','Ministerio de Hacienda','Banco Hispano Global S.A.','Gravamen temporal a la banca','AC-2026-4410'],
+  ['24/10/2026','Ministerio de Vivienda','Asociación Ibérica de Promotores','Ley de Vivienda: límite del alquiler (art. 4)','AC-2026-4387'],
+  ['21/10/2026','Presidencia del Gobierno','Energías del Atlántico S.A.','Precio de la electricidad','AC-2026-4351'],
+  ['17/10/2026','Ministerio de Trabajo','Círculo Empresarial Peninsular','Registro horario digital','AC-2026-4302'],
+  ['15/10/2026','Ministerio de Trabajo','Confederación Sindical de Trabajadores','Registro horario digital','AC-2026-4296'],
+  ['03/10/2026','Presidencia del Gobierno','Alcaldes de la comarca de Ponent','Zonas tensionadas de alquiler','AC-2026-4190']
+];
+
+const R = (t) => `<span class="redact">${t}</span>`;
+const COMS = [
+  { type:'correo', date:'06/10/2026 09:14', from:'Elena Robles Díaz (Ministerio de Hacienda)', to:'Jordi Casals Prat (Ministerio de Vivienda)', subject:'Financiación del artículo 11 de la Ley de Vivienda',
+    body:['Jordi:','Con el límite de gasto acordado con la UE no llego a 3.200 M€ el primer año. Puedo comprometer 2.400 M€ en 2027 y el resto desde 2028.','Si los grupos C y D aceptan escalonarlo, se puede incluir en la Ronda 2 sin tocar el resto de la ley.','Elena'], attach:['Escenario_presupuestario_2027.xlsx'] },
+  { type:'mensaje', date:'14/10/2026 22:41', from:'Andrés Molina Ruiz (Partido A)', to:'Nerea Gil Etxeberria (Partido E)', subject:'Votación del artículo 4',
+    chat:[['me','¿Votáis sí al art. 4 si se amplían las zonas tensionadas a todas las capitales?','22:41'],['them','Si se incluyen también los municipios de más de 20.000 habitantes, sí.','22:58'],['me','Lo hablo mañana con el grupo.','23:02'],['them','De acuerdo. Esto se publicará en 30 días, así que mejor un acuerdo que podamos defender.','23:04']] },
+  { type:'llamada', date:'21/10/2026 11:30', from:'Marta Ibáñez Solé (Presidencia del Gobierno)', to:'Dirección general de Energías del Atlántico S.A.', subject:'Precio de la electricidad', dur:'00:06:42',
+    tr:[['00:00','Presidencia','Buenos días. Le llamo por lo que hablamos en la reunión.'],['00:07','Energías del Atlántico','Buenos días. Le adelanto que un tope al precio nos parece inviable.'],['00:15','Presidencia','La economía y el coste de vida son la segunda prioridad ciudadana. Necesito una alternativa concreta.'],['01:02','Energías del Atlántico','Podríamos congelar la tarifa regulada un año si se aceleran los permisos de dos parques solares.'],['01:20','Presidencia','Los permisos no se cambian por nada. Envíelo por escrito y lo verá el Parlamento.'],['06:35','Energías del Atlántico','De acuerdo, lo enviamos esta semana.']] },
+  { type:'correo', date:'23/10/2026 17:02', from:'Ciudadana de Lleida', to:'Jordi Casals Prat (Ministerio de Vivienda)', subject:'Mi casero me sube el alquiler un 40%',
+    body:['Buenas tardes, me llamo '+R('NOMBRE OCULTO')+' y vivo en '+R('DIRECCIÓN OCULTA')+'.','Mi casero quiere subirme el alquiler de 650 € a 910 € al renovar. Tengo dos hijos y no encuentro nada más barato en el barrio.','¿La nueva ley me va a proteger?'], attach:[],
+    reply:'Respuesta del gabinete del ministro (24/10/2026): «Si su municipio se declara zona tensionada, la subida quedaría limitada al IPC. Lleida ha pedido la declaración.»' },
+  { type:'llamada', date:'30/10/2026 16:05', from:'Jordi Casals Prat (Ministerio de Vivienda)', to:'Alcaldía de Lleida', subject:'Declaración de Lleida como zona tensionada', dur:'00:04:18',
+    tr:[['00:00','Ministerio','¿Cómo va el informe de precios del alquiler?'],['00:05','Alcaldía','Casi listo. El alquiler medio ya está en el 34% de la renta media.'],['00:14','Ministerio','Entonces cumplís el criterio del artículo 4. Enviadlo y se tramita en cuanto se apruebe la ley.'],['04:10','Alcaldía','Lo enviamos el lunes.']] },
+  { type:'correo', date:'02/11/2026 12:47', from:'Agregaduría de Defensa de un país aliado', to:'Ministerio de Defensa', subject:'Calendario de entregas de material',
+    body:['Adjuntamos el calendario revisado de entregas previsto para 2027.'], attach:['Calendario_entregas_2027.pdf'],
+    held:'El adjunto está retenido por seguridad nacional hasta el 02/11/2028 (excepción EX-2026-1182, pedida por el Ministerio de Defensa y aprobada por el consejo por 7 votos a 2). El correo se publica.' }
+];
+
+/* =====================================================================
+   MODAL Y NAVEGACIÓN
+   ===================================================================== */
+let lastFocus = null, playTimer = null;
+function openModal(kicker, title, html){
+  lastFocus = document.activeElement;
+  $('mKicker').innerHTML = kicker; $('mTitle').textContent = title; $('mBody').innerHTML = html;
+  $('modal').classList.remove('hidden'); $('mClose').focus();
+}
+function closeModal(){ if (playTimer) { clearInterval(playTimer); playTimer = null; } $('modal').classList.add('hidden'); if (lastFocus) lastFocus.focus(); }
+$('mClose').onclick = closeModal;
+$('modal').addEventListener('click', (e) => { if (e.target.id === 'modal') closeModal(); });
+$('modal').addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+const VIEWS = ['propuesta','reformas','prioridades','buzon','cuentas','poder','comunicaciones','glosario'];
+function route(){
+  const h = location.hash.replace('#','');
+  const v = VIEWS.includes(h) ? h : 'propuesta';
+  document.querySelectorAll('[data-view]').forEach((s) => s.classList.toggle('hidden', s.dataset.view !== v));
+  document.querySelectorAll('nav.main a').forEach((a) => { if (a.dataset.tab === v) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', route);
+
+/* =====================================================================
+   REFORMAS
+   ===================================================================== */
+const vs = { sel:0, choice:null, art:'', siArt:'', sense:'', voted:false };
+const SENSES = [['corta','Se queda corta'],['pasa','Se pasa'],['otro','Otro enfoque']];
+
+function weighted(votes){
+  let total = 0;
+  const rows = PARTIES.map(([name,p],i) => {
+    const [si,obj,no] = votes[i]; const w = p/5; const yes = w*si; total += yes;
+    const sq = '<i class="vsq y"></i>'.repeat(si) + '<i class="vsq o"></i>'.repeat(obj) + '<i class="vsq n"></i>'.repeat(no);
+    const note = [si && si+' sí', obj && obj+' con objeción', no && no+' sin objeción'].filter(Boolean).join(', ');
+    return `<tr><td><strong>${esc(name)}</strong></td><td class="r">${pct(p)}</td><td class="r">${pct(w,2)}</td><td><span class="nowrap">${sq}</span> <span class="muted small">${note}</span></td><td class="r">${pct(yes)}</td></tr>`;
+  }).join('');
+  return { rows, total };
+}
+function meter(label, v, sub){
+  if (v === null) return `<div class="meter"><div class="top"><strong>${label}</strong><span class="v">—</span></div><div class="mbar"><span class="line"></span></div><div class="small muted">Pendiente · mínimo 75%</div><div class="small muted">${sub}</div></div>`;
+  const ok = v >= 75;
+  return `<div class="meter"><div class="top"><strong>${label}</strong><span class="v">${pct(v)}</span></div>
+    <div class="mbar" role="img" aria-label="${label}: ${pct(v)} de síes; mínimo 75%"><i style="width:${v}%;background:${ok?'var(--pri)':'var(--warn)'}"></i><span class="line"></span></div>
+    <div class="small"><strong style="color:${ok?'var(--ok)':'var(--warn)'}">${ok?'Supera el 75%':'No llega al 75%'}</strong></div><div class="small muted">${sub}</div></div>`;
+}
+function renderReforms(){
+  $('reformList').innerHTML = REFORMS.map((r,i) => `<li><button type="button" class="ritem" data-i="${i}" aria-pressed="${vs.sel===i}"><span class="st">${PHASES[r.phase]} · ${r.round}</span><span class="t">${esc(r.title)}</span><span class="o">${esc(r.origin)}</span></button></li>`).join('');
+  const r = REFORMS[vs.sel]; const w = weighted(r.votes);
+  $('rMeta').textContent = r.code + ' · ' + r.origin;
+  $('rTitle').textContent = r.title;
+  $('rSteps').innerHTML = PHASES.map((p,i) => { const now = i === r.phase && r.phase !== 4; const done = i < r.phase || r.phase === 4;
+    return `<li class="${now?'now':done?'done':''}"><b>${i+1}${done&&!now?' ✓':''}</b>${p}</li>`; }).join('');
+  $('rMeters').innerHTML = meter('Parlamento (ponderado)', w.total, 'Síes de los portavoces según el peso de su partido') + meter('Votación popular', r.pueblo, r.puebloSub);
+  $('rChanges').innerHTML = r.changes.map((c) => `<li>${esc(c)}</li>`).join('');
+  $('rObj').innerHTML = r.objections.map(([a,t,p]) => `<div class="obj"><span><strong>${a}:</strong> ${esc(t)}</span><span class="nowrap">${p} de los «no»</span></div>`).join('');
+  const base = BUD(r.costPolicy);
+  $('rCost').innerHTML = `<strong>Coste:</strong> ${num(r.cost)} M€ al año. ` + (r.costPolicy !== 'Resto de políticas'
+    ? `La política de «${r.costPolicy}» tiene hoy ${num(base)} M€ en el presupuesto vigente <span class="tag real">Dato real</span>; esta reforma la aumentaría un ${pct(r.cost/base*100,0)}.`
+    : `Se financia con cargo a los servicios generales del Estado.`);
+  $('pBody').innerHTML = w.rows; $('pTotal').textContent = pct(w.total);
+  $('voteBox').classList.toggle('hidden', r.phase !== 3);
+  $('voteNote').innerHTML = LIVE ? 'Esta web no pide DNI: es un sondeo de opinión. Cuenta un voto por conexión; si vuelves a votar, se sustituye el anterior. ' + USER : 'Un voto por persona y ronda. El personal de la biblioteca solo comprueba tu identidad; el voto se guarda sin vínculo con tu DNI. <span class="tag sim">Demostración</span>';
+  loadLiveVotes();
+  const opt = (attr, a, on) => `<button type="button" class="opt" ${attr}="${esc(a)}" aria-pressed="${on}">${esc(a)}</button>`;
+  $('siArts').innerHTML = r.articles.map((a) => opt('data-siart', a, vs.siArt === a)).join('');
+  $('noArts').innerHTML = r.articles.map((a) => opt('data-art', a, vs.art === a)).join('');
+  $('senses').innerHTML = SENSES.map(([id,l]) => `<button type="button" class="opt" data-sense="${id}" aria-pressed="${vs.sense===id}">${l}</button>`).join('');
+  $('cSi').setAttribute('aria-pressed', vs.choice === 'si'); $('cNo').setAttribute('aria-pressed', vs.choice === 'no');
+  $('siBox').classList.toggle('hidden', vs.choice !== 'si'); $('noBox').classList.toggle('hidden', vs.choice !== 'no');
+  $('voteForm').classList.toggle('hidden', vs.voted); $('voteDone').classList.toggle('hidden', !vs.voted);
+  checkVote();
+}
+function checkVote(){ $('voteBtn').disabled = !vs.choice || (vs.choice === 'no' && (!vs.art || !vs.sense || $('noText').value.trim().length < 10)); }
+$('reformList').addEventListener('click', (e) => { const b = e.target.closest('[data-i]'); if (!b) return;
+  Object.assign(vs, { sel:+b.dataset.i, choice:null, art:'', siArt:'', sense:'', voted:false }); $('siText').value = ''; $('noText').value = ''; renderReforms(); });
+$('cSi').onclick = () => { vs.choice = 'si'; renderReforms(); };
+$('cNo').onclick = () => { vs.choice = 'no'; renderReforms(); };
+$('siArts').addEventListener('click', (e) => { const b = e.target.closest('[data-siart]'); if (b) { vs.siArt = vs.siArt === b.dataset.siart ? '' : b.dataset.siart; renderReforms(); } });
+$('noArts').addEventListener('click', (e) => { const b = e.target.closest('[data-art]'); if (b) { vs.art = b.dataset.art; renderReforms(); } });
+$('senses').addEventListener('click', (e) => { const b = e.target.closest('[data-sense]'); if (b) { vs.sense = b.dataset.sense; renderReforms(); } });
+$('noText').addEventListener('input', checkVote);
+$('voteBtn').onclick = async () => {
+  const r = REFORMS[vs.sel], key = 'vp_voto_' + r.code;
+  if (LIVE) {
+    $('voteBtn').disabled = true;
+    const row = { reforma: r.code, voto: vs.choice, articulo: vs.choice === 'no' ? vs.art : (vs.siArt || null), sentido: vs.choice === 'no' ? vs.sense : null };
+    const { error } = await db.from('votos').insert(row);
+    if (error) { $('voteSummary').textContent = 'No se ha podido guardar el voto. Inténtalo más tarde.'; vs.voted = true; renderReforms(); return; }
+    const txt = (vs.choice === 'no' ? $('noText').value : $('siText').value).trim();
+    if (txt) await db.from('comentarios').insert({ origen: 'voto', referencia: r.code, texto: txt.slice(0, 2000) });
+    store.set(key, '1'); loadLiveVotes();
+  }
+  let m;
+  if (vs.choice === 'si') { const t = $('siText').value.trim(); m = t ? `Has votado <strong>sí</strong> con una valoración${vs.siArt ? ' sobre «' + esc(vs.siArt) + '»' : ''}. No frena la reforma; se tendrá en cuenta al desarrollarla.` : 'Has votado <strong>sí</strong>.'; }
+  else { const s = (SENSES.find((x) => x[0] === vs.sense) || [0,''])[1].toLowerCase(); m = `Has votado <strong>no con objeción</strong> en «${esc(vs.art)}» (${s}). Tu propuesta entra en la negociación de la siguiente ronda.`; }
+  $('voteSummary').innerHTML = m + (LIVE ? ' Tu voto se ha guardado y ya cuenta en los resultados. Los comentarios no se publican: solo se muestran agrupados por artículo.' : ' Modo demostración: el voto no se ha guardado.');
+  vs.voted = true; renderReforms();
+};
+$('lawBtn').onclick = () => { const r = REFORMS[vs.sel];
+  openModal(esc(r.code) + ' · ' + r.round + ' ' + SIM, r.title,
+    `<p class="muted"><em>Exposición de motivos.</em> ${esc(r.preamble)}</p>` + r.law.map(([h,t]) => `<div class="law-art"><h3>${esc(h)}</h3><p>${esc(t)}</p></div>`).join('') +
+    `<div class="law-art"><h3>Memoria económica</h3><p>${num(r.cost)} M€ al año, con cargo a la política «${esc(r.costPolicy)}».</p></div>`); };
+
+/* =====================================================================
+   PRIORIDADES
+   ===================================================================== */
+const ps = { picks:[] };
+function renderConcerns(){
+  const max = CONCERNS[0][1];
+  $('cBody').innerHTML = CONCERNS.map(([n,p],i) => `<tr><td>${i+1}</td><td><strong>${n}</strong>${i===0?' <span class="small" style="color:var(--warn);font-weight:700">· reforma en marcha</span>':''}</td><td><div class="bar"><i style="width:${p/max*100}%"></i></div></td><td class="r">${pct(p)}</td></tr>`).join('');
+  $('cOpts').innerHTML = CONCERNS.map(([n]) => { const i = ps.picks.indexOf(n);
+    return `<button type="button" class="opt" data-cat="${esc(n)}" aria-pressed="${i>=0}">${n}${i>=0?`<span class="n">${i+1}º</span>`:''}</button>`; }).join('');
+  $('rankWrap').classList.toggle('hidden', ps.picks.length === 0);
+  $('myRank').innerHTML = ps.picks.map((n,i) => `<li><span class="p">${i+1}º</span><span class="nm">${n} <span class="muted small">(${8-i} puntos)</span></span>
+    <button type="button" class="ic" data-up="${i}" aria-label="Subir ${n}" ${i===0?'disabled':''}>↑</button>
+    <button type="button" class="ic" data-down="${i}" aria-label="Bajar ${n}" ${i===ps.picks.length-1?'disabled':''}>↓</button>
+    <button type="button" class="ic" data-rm="${i}" aria-label="Quitar ${n}">✕</button></li>`).join('');
+  checkP();
+}
+function checkP(){ $('pBtn').disabled = ps.picks.length === 0 || $('why').value.trim().length < 5; }
+$('cOpts').addEventListener('click', (e) => { const b = e.target.closest('[data-cat]'); if (!b) return; const n = b.dataset.cat; const i = ps.picks.indexOf(n); if (i >= 0) ps.picks.splice(i,1); else ps.picks.push(n); renderConcerns(); });
+$('myRank').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; const p = ps.picks;
+  if (b.dataset.up) { const i = +b.dataset.up; [p[i-1],p[i]] = [p[i],p[i-1]]; } else if (b.dataset.down) { const i = +b.dataset.down; [p[i+1],p[i]] = [p[i],p[i+1]]; } else if (b.dataset.rm) p.splice(+b.dataset.rm,1); renderConcerns(); });
+$('why').addEventListener('input', checkP);
+$('pBtn').onclick = async () => {
+  if (LIVE) { $('pBtn').disabled = true;
+    const { error } = await db.from('prioridades').insert({ ranking: ps.picks.slice() });
+    if (!error) { const t = [$('why').value.trim() && ('Por qué: ' + $('why').value.trim()), $('sol').value.trim() && ('Solución: ' + $('sol').value.trim())].filter(Boolean).join('\n');
+      if (t) await db.from('comentarios').insert({ origen: 'prioridad', referencia: ps.picks[0], texto: t.slice(0, 2000) }); store.set('vp_prio', '1'); loadLiveRank(); } }
+  $('pMsg').innerHTML = ps.picks.map((n,i) => `<strong>${i+1}º</strong> ${esc(n)}`).join('<br>') + (LIVE ? '<br><span class="muted small">Guardada. Ya cuenta en la clasificación de los visitantes.</span>' : '<br><span class="muted small">Modo demostración: no se ha guardado.</span>'); $('pForm').classList.add('hidden'); $('pDone').classList.remove('hidden'); };
+$('pReset').onclick = () => { $('pForm').classList.remove('hidden'); $('pDone').classList.add('hidden'); };
+
+/* =====================================================================
+   BUZÓN
+   ===================================================================== */
+const ds = { mode:'denuncia', cat:'' };
+function renderBuzon(){
+  const den = ds.mode === 'denuncia';
+  document.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mode === ds.mode));
+  $('dOnly').classList.toggle('hidden', !den);
+  $('dLabel').textContent = den ? 'Qué ha pasado (sin nombres)' : 'Tu propuesta';
+  $('dText').placeholder = den ? 'Ej.: En mi sector es habitual hacer horas extra que no se pagan ni se registran.' : 'Ej.: Que los puntos de voto abran también los sábados.';
+  $('dCats').innerHTML = DCATS.map(([id,l,h]) => `<button type="button" class="radio" data-dcat="${id}" aria-pressed="${ds.cat===id}"><span class="dot"></span><span><strong>${l}</strong><br><span class="small muted">${h}</span></span></button>`).join('');
+  checkD();
+}
+function checkD(){ $('dBtn').disabled = $('dText').value.trim().length < 10 || (ds.mode === 'denuncia' && !ds.cat); }
+document.querySelectorAll('[data-mode]').forEach((b) => b.onclick = () => { ds.mode = b.dataset.mode; renderBuzon(); });
+$('dCats').addEventListener('click', (e) => { const b = e.target.closest('[data-dcat]'); if (b) { ds.cat = b.dataset.dcat; renderBuzon(); } });
+$('dText').addEventListener('input', checkD);
+$('dBtn').onclick = async () => {
+  let ok = true;
+  if (LIVE) { $('dBtn').disabled = true; const { error } = await db.from('buzon').insert({ tipo: ds.mode, categoria: ds.mode === 'denuncia' ? ds.cat : null, texto: $('dText').value.trim().slice(0, 4000) }); ok = !error; }
+  $('dDoneMsg').textContent = !LIVE ? 'Modo demostración: el mensaje no se ha enviado.' : ok ? 'Gracias. Lo leeré y lo tendré en cuenta para mejorar la propuesta entre todos. No se publicará y se borrará a los 90 días.' : 'No se ha podido enviar. Inténtalo más tarde.';
+  $('dForm').classList.add('hidden'); $('dDone').classList.remove('hidden'); };
+$('dReset').onclick = () => { $('dText').value = ''; ds.cat = ''; $('dForm').classList.remove('hidden'); $('dDone').classList.add('hidden'); renderBuzon(); };
+
+/* =====================================================================
+   CUENTAS PÚBLICAS
+   ===================================================================== */
+function renderCuentas(){
+  const rows = BUDGET.concat([['Resto de políticas (transferencias a CCAA y ayuntamientos, educación, infraestructuras, servicios generales…)', BUD_RESTO]]);
+  const maxv = BUDGET[0][1];
+  $('budBody').innerHTML = rows.map(([n,v]) => { const s = v/BUDGET_TOTAL*100;
+    return `<tr><td>${n}</td><td class="r">${num(v)}</td><td class="r">${s.toFixed(1).replace('.',',')}</td></tr>`; }).join('');
+  $('per100').textContent = (BUDGET[0][1]/BUDGET_TOTAL*100).toFixed(1).replace('.',',') + ' €';
+  $('ofBody').innerHTML = OFFICIALS.map((o,i) => { const t = o.exp.reduce((a,x) => a + x[3], 0);
+    return `<tr><td>${o.role}</td><td><strong>${o.name}</strong></td><td class="r">${eur(o.salary)}</td><td class="r">${eur(t,2)}</td><td><button type="button" class="link" data-of="${i}">Ver gastos y facturas</button></td></tr>`; }).join('');
+  renderContracts();
+}
+function renderContracts(){
+  const q = $('q').value.trim().toLowerCase();
+  const list = CONTRACTS.map((c,i) => [c,i]).filter(([c]) => !q || [c.co,c.org,c.what,c.project,c.policy].join(' ').toLowerCase().includes(q));
+  $('ctBody').innerHTML = list.map(([c,i]) => `<tr><td><button type="button" class="link" data-ct="${i}">${c.inv}</button><div class="xs muted">${c.date}</div></td><td><strong>${c.co}</strong><div class="xs muted">${c.org}</div></td><td>${c.what}</td><td>${c.policy}</td><td class="r nowrap">${eur(c.total)}</td></tr>`).join('');
+  $('ctEmpty').classList.toggle('hidden', list.length > 0); $('ctEmpty').textContent = 'Ningún contrato coincide con «' + $('q').value + '».';
+}
+$('q').addEventListener('input', renderContracts);
+$('ctBody').addEventListener('click', (e) => { const b = e.target.closest('[data-ct]'); if (!b) return; const c = CONTRACTS[+b.dataset.ct];
+  const base = c.total/1.21, iva = c.total - base, pol = BUD(c.policy);
+  openModal('Factura ' + c.inv + ' ' + SIM, c.what,
+    `<div class="belongs"><strong>A qué pertenece este gasto</strong><ol>
+      <li><strong>Política de gasto:</strong> ${c.policy} — ${num(pol)} M€ en el presupuesto vigente <span class="tag real">Dato real</span>. Esta factura supone el ${(c.total/(pol*1e6)*100).toFixed(3).replace('.',',')}% de esa política.</li>
+      <li><strong>Proyecto:</strong> ${c.project}</li>
+      <li><strong>Lo autoriza:</strong> ${c.law}</li>
+      <li><strong>Para qué:</strong> ${c.why}</li></ol></div>
+    <dl class="meta"><div><dt>Emisor</dt><dd>${c.co}</dd></div><div><dt>CIF</dt><dd>${c.cif}</dd></div><div><dt>Paga</dt><dd>${c.org}</dd></div><div><dt>Fecha</dt><dd>${c.date}</dd></div><div><dt>Estado</dt><dd>${c.paid}</dd></div></dl>
+    <div class="tbl"><table><thead><tr><th>Concepto</th><th class="r">Importe</th></tr></thead><tbody>` +
+    c.lines.map(([t,f]) => `<tr><td>${t}</td><td class="r">${eur(base*f,2)}</td></tr>`).join('') +
+    `<tr><td class="muted">Base imponible</td><td class="r">${eur(base,2)}</td></tr><tr><td class="muted">IVA (21%)</td><td class="r">${eur(iva,2)}</td></tr></tbody>
+    <tfoot><tr><td>Total</td><td class="r">${eur(c.total,2)}</td></tr></tfoot></table></div>`); });
+$('ofBody').addEventListener('click', (e) => { const b = e.target.closest('[data-of]'); if (!b) return; const o = OFFICIALS[+b.dataset.of];
+  const t = o.exp.reduce((a,x) => a + x[3], 0);
+  openModal(o.role + ' ' + SIM, o.name,
+    `<p><strong>Sueldo bruto anual:</strong> ${eur(o.salary)}</p><h3>Gastos pagados con dinero público · octubre de 2026</h3>
+    <div class="tbl"><table><thead><tr><th>Fecha</th><th>Concepto</th><th>Motivo</th><th class="r">Importe</th></tr></thead><tbody>` +
+    o.exp.map(([d,c,p,a,m]) => `<tr><td class="nowrap">${d}</td><td>${c}<div class="xs muted">${p}</div></td><td class="small">${m}</td><td class="r">${eur(a,2)}</td></tr>`).join('') +
+    `</tbody><tfoot><tr><td colspan="3">Total</td><td class="r">${eur(t,2)}</td></tr></tfoot></table></div>`); });
+
+/* =====================================================================
+   PODER ECONÓMICO
+   ===================================================================== */
+function renderPoder(){
+  $('fortBody').innerHTML = FORTUNES.map(([r,n,o,v,w,how]) => `<tr><td>${r}</td><td><strong>${n}</strong></td><td>${o}</td><td class="r nowrap">${num(v)} M€</td><td>${w}</td><td class="small">${how}</td><td class="muted small">No público</td></tr>`).join('');
+  renderCalc();
+  $('bienesBody').innerHTML = BIENES.map((x,i) => { const o = OFFICIALS[x.o]; const tp = x.props.reduce((a,p) => a + p[3], 0);
+    return `<tr><td>${o.role}</td><td><strong>${o.name}</strong></td><td class="r">${x.props.length}</td><td class="r nowrap">${eur(tp)}</td><td class="r">${x.cos.length}</td><td class="small">${esc(x.before)}</td><td><button type="button" class="link" data-bien="${i}">Ver detalle</button></td></tr>`; }).join('');
+  $('agBody').innerHTML = AGENDA.map(([d,c,w,t,a],i) => `<tr><td class="nowrap">${d}</td><td>${c}</td><td><strong>${w}</strong></td><td>${t}</td><td><button type="button" class="link" data-ag="${i}">${a}</button></td></tr>`).join('');
+}
+$('bienesBody').addEventListener('click', (e) => { const b = e.target.closest('[data-bien]'); if (!b) return; const x = BIENES[+b.dataset.bien]; const o = OFFICIALS[x.o];
+  const tp = x.props.reduce((a,p) => a + p[3], 0), tc = x.cos.reduce((a,c) => a + c[3], 0);
+  openModal(o.role + ' ' + SIM, o.name,
+    `<h3>Inmuebles</h3><div class="tbl"><table><thead><tr><th>Tipo</th><th>Lugar</th><th>Propiedad</th><th class="r">Valor catastral</th></tr></thead><tbody>` +
+    x.props.map(([t,w,p,v]) => `<tr><td>${t}</td><td>${w}</td><td>${p}</td><td class="r">${eur(v)}</td></tr>`).join('') + `</tbody><tfoot><tr><td colspan="3">Total</td><td class="r">${eur(tp)}</td></tr></tfoot></table></div>
+    <h3 style="margin-top:18px">Empresas y participaciones</h3>` +
+    (x.cos.length ? `<div class="tbl"><table><thead><tr><th>Sociedad</th><th>Actividad</th><th>Participación</th><th class="r">Valor</th></tr></thead><tbody>` + x.cos.map(([n,a,p,v]) => `<tr><td><strong>${n}</strong></td><td>${a}</td><td>${p}</td><td class="r">${eur(v)}</td></tr>`).join('') + `</tbody><tfoot><tr><td colspan="3">Total</td><td class="r">${eur(tc)}</td></tr></tfoot></table></div>` : '<p class="muted">No declara empresas ni acciones.</p>') +
+    `<h3 style="margin-top:18px">Trayectoria</h3><p style="margin:0"><strong>Antes del cargo:</strong> ${esc(x.before)}<br><strong>Después del cargo:</strong> se publicará durante 5 años tras el cese.</p>`); });
+$('agBody').addEventListener('click', (e) => { const b = e.target.closest('[data-ag]'); if (!b) return; const [d,c,w,t,a] = AGENDA[+b.dataset.ag];
+  openModal('Acta ' + a + ' ' + SIM, t,
+    `<dl class="meta"><div><dt>Fecha</dt><dd>${d}</dd></div><div><dt>Cargo</dt><dd>${c}</dd></div><div><dt>Con quién</dt><dd>${w}</dd></div><div><dt>Duración</dt><dd>1 h 10 min</dd></div></dl>
+    <h3>Resumen</h3><p>${esc(w)} expuso su posición sobre «${esc(t)}» y entregó un documento con propuestas. El Gobierno no asumió compromisos en la reunión; cualquier cambio deberá pasar por el Parlamento.</p>
+    <h3>Documentos entregados</h3><p style="margin:0">${a}-DOC1.pdf · ${a}-DOC2.pdf</p>`); });
+
+/* =====================================================================
+   COMUNICACIONES
+   ===================================================================== */
+const CT = [['todo','Todo'],['correo','Correos'],['mensaje','Mensajes'],['llamada','Llamadas']];
+const TL = { correo:'Correo', mensaje:'Mensajes', llamada:'Llamada' };
+const cs = { type:'todo' };
+function renderComs(){
+  $('comTypes').innerHTML = CT.map(([id,l]) => `<button type="button" data-ct2="${id}" aria-pressed="${cs.type===id}">${l}</button>`).join('');
+  const q = $('cq').value.trim().toLowerCase();
+  const list = COMS.map((c,i) => [c,i]).filter(([c]) => (cs.type === 'todo' || c.type === cs.type) && (!q || (c.from+' '+c.to+' '+c.subject).toLowerCase().includes(q)));
+  $('comList').innerHTML = list.map(([c,i]) => `<button type="button" class="citem" data-com="${i}"><span class="ctype">${TL[c.type]}</span><span style="flex:1;min-width:0"><strong>${esc(c.subject)}</strong><span class="small muted" style="display:block">${esc(c.from)} → ${esc(c.to)}</span></span><span class="xs muted nowrap">${c.date.split(' ')[0]}</span></button>`).join('');
+  $('comEmpty').classList.toggle('hidden', list.length > 0);
+}
+$('comTypes').addEventListener('click', (e) => { const b = e.target.closest('[data-ct2]'); if (b) { cs.type = b.dataset.ct2; renderComs(); } });
+$('cq').addEventListener('input', renderComs);
+$('comList').addEventListener('click', (e) => { const b = e.target.closest('[data-com]'); if (!b) return; const c = COMS[+b.dataset.com];
+  const medio = c.type === 'correo' ? 'Correo oficial' : c.type === 'mensaje' ? 'Teléfono oficial, mensajería' : 'Línea oficial, grabada';
+  let html = `<dl class="meta"><div><dt>De</dt><dd>${esc(c.from)}</dd></div><div><dt>Para</dt><dd>${esc(c.to)}</dd></div><div><dt>Fecha</dt><dd>${c.date}</dd></div><div><dt>Medio</dt><dd>${medio}</dd></div></dl>`;
+  if (c.type === 'correo') {
+    html += c.body.map((p) => `<p>${p}</p>`).join('') + (c.attach.length ? `<p><strong>Adjuntos:</strong> ${c.attach.map(esc).join(', ')}</p>` : '') + (c.reply ? `<p class="muted small">${esc(c.reply)}</p>` : '') + (c.held ? `<div class="callout warn" style="margin:0">${esc(c.held)}</div>` : '');
+  } else if (c.type === 'mensaje') {
+    html += `<div class="chat">${c.chat.map(([w,t,h]) => `<div class="msg ${w}">${esc(t)}<small>${esc((w==='me'?c.from:c.to).split(' (')[0])} · ${h}</small></div>`).join('')}</div>`;
+  } else {
+    html += `<div class="player"><button type="button" class="btn" id="playBtn" aria-label="Reproducir" style="min-width:60px">▶</button><div style="flex:1"><div class="mbar" style="margin:0"><i id="playBar" style="width:0;background:var(--pri)"></i></div><div class="xs muted" style="display:flex;justify-content:space-between;margin-top:4px"><span id="playT">00:00</span><span>${c.dur}</span></div></div></div><h3>Transcripción</h3>` +
+      c.tr.map(([t,w,s]) => `<div class="tline"><span class="muted">${t}</span><span><strong>${esc(w)}:</strong> ${esc(s)}</span></div>`).join('');
+  }
+  openModal(TL[c.type] + ' ' + SIM, c.subject, html);
+  if (c.type === 'llamada') {
+    const [h,m,s] = c.dur.split(':').map(Number); const total = h*3600+m*60+s; let t = 0;
+    $('playBtn').onclick = () => {
+      if (playTimer) { clearInterval(playTimer); playTimer = null; $('playBtn').textContent = '▶'; $('playBtn').setAttribute('aria-label','Reproducir'); return; }
+      $('playBtn').textContent = '❚❚'; $('playBtn').setAttribute('aria-label','Pausar');
+      playTimer = setInterval(() => { t = Math.min(t + 4, total); $('playBar').style.width = (t/total*100) + '%';
+        $('playT').textContent = String(Math.floor(t/60)).padStart(2,'0') + ':' + String(t%60).padStart(2,'0');
+        if (t >= total) { clearInterval(playTimer); playTimer = null; $('playBtn').textContent = '▶'; } }, 250);
+    };
+  }
+});
+
+
+/* ---------- Comparador personal ---------- */
+const cs2 = { who:'asal' };
+const v = (id) => { const x = parseFloat(String($(id).value).replace(',','.')); return isNaN(x) ? 0 : x; };
+function rowBar(p, me){ const w = Math.min(p/60*100,100); return `<div class="bar" style="height:10px"><i style="width:${w}%;background:${me?'var(--warn)':'var(--pri)'}"></i></div>`; }
+function verdict(p, mine){ const d = p - mine; if (Math.abs(d) < 0.5) return '<strong>Lo mismo que tú</strong>'; return d > 0 ? `<strong style="color:var(--ok)">Paga ${pct(d)} más que tú</strong>` : `<strong style="color:var(--warn)">Paga ${pct(-d)} menos que tú</strong>`; }
+function renderCalc(){
+  document.querySelectorAll('[data-who]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.who === cs2.who));
+  $('fAsal').classList.toggle('hidden', cs2.who !== 'asal'); $('fAuto').classList.toggle('hidden', cs2.who !== 'auto');
+  let tax, lab, name;
+  if (cs2.who === 'asal') { const g = v('inGross'); tax = v('inIrpf'); name = 'Tú (asalariado)'; lab = `Tu IRPF: ${eur(g*tax/100)} al mes de ${eur(g)} brutos`; }
+  else { const n = v('inNet'); tax = v('inIrpfA'); name = 'Tú (autónomo)'; lab = `Tu IRPF: ${eur(n*tax/100)} al mes de ${eur(n)} netos`; }
+  $('youTax').textContent = pct(tax); $('youTaxL').textContent = lab;
+  $('cmp1').innerHTML = `<tr style="background:var(--warn-l)"><td><strong>${name}</strong></td><td class="r">—</td><td class="r">—</td><td class="r"><strong>${pct(tax)}</strong></td><td>${rowBar(tax,true)}</td><td></td></tr>` +
+    COMPANIES.map(([n,y,g,p,pc]) => `<tr><td><strong>${n}</strong><div class="xs muted">${y}</div></td><td class="r nowrap">${g}</td><td class="r nowrap">${p}</td><td class="r"><strong>${pct(pc)}</strong></td><td>${rowBar(pc)}</td><td>${verdict(pc,tax)}</td></tr>`).join('');
+  const lower = COMPANIES.filter((c) => c[4] < tax).map((c) => c[0]);
+  $('verdict').innerHTML = lower.length
+    ? `<strong>Con tus datos:</strong> ${lower.join(', ')} ${lower.length>1?'pagan':'paga'} sobre su beneficio un porcentaje <strong>menor</strong> que tú sobre lo que ganas.`
+    : `<strong>Con tus datos:</strong> las grandes empresas que publican sus cifras pagan sobre su beneficio un porcentaje <strong>igual o mayor</strong> que tú. La sospecha de que pagan menos no se confirma con estas cifras, pero mira abajo lo que estas cifras no enseñan.`;
+}
+document.querySelectorAll('[data-who]').forEach((b) => b.onclick = () => { cs2.who = b.dataset.who; renderCalc(); });
+['inGross','inIrpf','inNet','inIrpfA'].forEach((id) => $(id).addEventListener('input', renderCalc));
+
+
+/* =====================================================================
+   RESULTADOS REALES (Supabase)
+   ===================================================================== */
+async function loadLiveVotes(){
+  const box = $('liveVotes'); const r = REFORMS[vs.sel];
+  if (!LIVE || r.phase !== 3) { box.classList.add('hidden'); return; }
+  const { data, error } = await db.from('votos').select('voto,articulo,sentido').eq('reforma', r.code).limit(10000);
+  if (error) { box.classList.add('hidden'); return; }
+  const n = data.length, si = data.filter((x) => x.voto === 'si').length, no = n - si;
+  const objs = {};
+  data.filter((x) => x.voto === 'no' && x.articulo).forEach((x) => { const k = x.articulo + ' — ' + (SENSES.find((s) => s[0] === x.sentido) || [0,'otro'])[1].toLowerCase(); objs[k] = (objs[k] || 0) + 1; });
+  const top = Object.entries(objs).sort((a,b) => b[1]-a[1]).slice(0,5);
+  const p = n ? si/n*100 : 0;
+  box.innerHTML = `<div class="box-h"><div><h2>Lo que votan los visitantes</h2><p class="muted small" style="margin:0">${num(n)} ${n===1?'voto':'votos'} en esta web · sondeo de opinión sin verificación de identidad</p></div>${USER}</div>` +
+    (n ? `<div class="meter"><div class="top"><strong>Sí</strong><span class="v">${pct(p)}</span></div><div class="mbar"><i style="width:${p}%;background:${p>=75?'var(--pri)':'var(--warn)'}"></i><span class="line"></span></div><div class="small muted">${num(si)} sí · ${num(no)} no con objeción · mínimo para aprobarse: 75%</div></div>` +
+      (top.length ? `<h3 style="margin-top:14px">Objeciones de los visitantes</h3>` + top.map(([k,c]) => `<div class="obj"><span>${esc(k)}</span><span class="nowrap">${c} ${c===1?'voto':'votos'}</span></div>`).join('') : '')
+      : '<p style="margin:0">Todavía no ha votado nadie. Sé la primera persona.</p>');
+  box.classList.remove('hidden');
+}
+async function loadLiveRank(){
+  const box = $('liveRank'); if (!LIVE) return;
+  const { data, error } = await db.from('prioridades').select('ranking').limit(20000);
+  if (error) return;
+  const pts = {}; let total = 0;
+  data.forEach((x) => (x.ranking || []).forEach((name, i) => { if (!CONCERNS.some((c) => c[0] === name)) return; const p = Math.max(8 - i, 1); pts[name] = (pts[name] || 0) + p; total += p; }));
+  const rows = Object.entries(pts).sort((a,b) => b[1]-a[1]);
+  box.innerHTML = `<div class="box-h"><div><h2>Clasificación de los visitantes</h2><p class="muted small" style="margin:0">${num(data.length)} ${data.length===1?'persona ha':'personas han'} ordenado sus prioridades en esta web</p></div>${USER}</div>` +
+    (rows.length ? `<div class="tbl"><table><thead><tr><th style="width:44px">#</th><th>Problema</th><th class="r">Puntos</th><th class="r">%</th></tr></thead><tbody>` +
+      rows.map(([n,p],i) => `<tr><td>${i+1}</td><td><strong>${esc(n)}</strong>${i===0?' <span class="small" style="color:var(--warn);font-weight:700">· sería la primera reforma</span>':''}</td><td class="r">${num(p)}</td><td class="r">${pct(p/total*100)}</td></tr>`).join('') + `</tbody></table></div>`
+      : '<p style="margin:0">Todavía no hay respuestas. Ordena tus prioridades y serás la primera.</p>');
+  box.classList.remove('hidden');
+}
+$('modeChip').innerHTML = LIVE
+  ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E6B38" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Votos y respuestas <strong>reales</strong>: lo que envíes se guarda</span>'
+  : '<span><strong>Modo demostración</strong>: no se guarda nada de lo que envíes</span>';
+if (LIVE) loadLiveRank();
+
+/* =====================================================================
+   APOYO A LA PROPUESTA (me gusta / no me gusta por punto)
+   ===================================================================== */
+const likeCounts = {};
+function renderLikes(){
+  document.querySelectorAll('.likes[data-punto]').forEach((el) => {
+    const p = el.dataset.punto, mine = store.get('vp_like_' + p), c = likeCounts[p] || { si:0, no:0 };
+    const n = c.si + c.no;
+    el.innerHTML = `<button type="button" data-like="si" aria-pressed="${mine==='si'}">Me gusta</button><button type="button" data-like="no" aria-pressed="${mine==='no'}">No me gusta</button>` +
+      `<span class="res">${LIVE ? (n ? `${pct(c.si/n*100,0)} a favor · ${num(n)} ${n===1?'voto':'votos'} ${USER}` : 'Aún sin votos') : (mine ? 'Modo demostración: no se guarda' : '')}</span>`;
+  });
+}
+async function loadLikes(){
+  if (!LIVE) { renderLikes(); return; }
+  const { data, error } = await db.from('apoyos').select('punto,valor').limit(50000);
+  if (!error) { Object.keys(likeCounts).forEach((k) => delete likeCounts[k]); data.forEach((x) => { const c = likeCounts[x.punto] || (likeCounts[x.punto] = { si:0, no:0 }); c[x.valor] = (c[x.valor] || 0) + 1; }); }
+  renderLikes();
+}
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('.likes [data-like]'); if (!b) return;
+  const p = b.closest('.likes').dataset.punto, val = b.dataset.like, prev = store.get('vp_like_' + p);
+  if (prev === val) return;
+  store.set('vp_like_' + p, val);
+  if (LIVE) { const { error } = await db.from('apoyos').insert({ punto: p, valor: val }); if (error) { store.set('vp_like_' + p, prev || ''); } await loadLikes(); } else renderLikes();
+});
+$('likeSend').onclick = async () => {
+  const t = $('likeText').value.trim(); if (t.length < 3) { $('likeSent').textContent = 'Escribe algo primero.'; return; }
+  if (LIVE) { $('likeSend').disabled = true; const { error } = await db.from('comentarios').insert({ origen: 'propuesta', referencia: 'general', texto: t.slice(0, 2000) }); $('likeSent').textContent = error ? 'No se ha podido enviar.' : 'Gracias. Lo leeré y lo tendré en cuenta para mejorar la propuesta entre todos.'; if (!error) $('likeText').value = ''; $('likeSend').disabled = false; }
+  else $('likeSent').textContent = 'Modo demostración: no se ha enviado.';
+};
+loadLikes();
+
+/* =====================================================================
+   LEYES REALES (datos comprobados) + voto de los visitantes
+   ===================================================================== */
+const REAL_LAWS = [
+  { id:'real-jornada', title:'Reducción de la jornada laboral a 37,5 horas', status:'Rechazada', statusColor:'var(--warn)', date:'10 de septiembre de 2025',
+    what:['Bajaba la jornada máxima de 40 a 37,5 horas semanales sin rebajar el sueldo.','Según el Gobierno, afectaría a 12,5 millones de personas.'],
+    favor:'El Gobierno (PSOE y Sumar), CCOO y UGT: más tiempo libre y reparto del trabajo, con la misma paga.',
+    contra:'Las patronales CEOE y Cepyme rechazaron la medida. PP, Vox, Junts y UPN votaron para devolverla al Gobierno; Junts dijo que no respondía a los problemas de los trabajadores.',
+    vote:'Se votaron las enmiendas a la totalidad para devolver el proyecto al Gobierno: 178 a favor y 170 en contra, sin abstenciones. El proyecto decayó.',
+    congreso:{ yes:170, no:178, abst:0, label:'a favor de tramitar la ley' },
+    sources:[['El Salto','https://www.elsaltodiario.com/reduccion-jornada/congreso-rechaza-reduccion-jornada-laboral-diaz-promete-volver-intentarlo'],['Periódico de Ibiza (Europa Press)','https://www.periodicodeibiza.es/noticias/nacional/2025/09/11/2467647/congreso-tumba-reduccion-jornada-laboral-prosperar-veto-vox-junts.html'],['RTVC','https://rtvc.es/pp-vox-junts-tumban-ley-jornada-laboral-10-septiembre-2025/']] },
+  { id:'real-smi-irpf', title:'Salario mínimo de 1.221 € y su exención del IRPF (2026)', status:'Aprobada', statusColor:'var(--ok)', date:'18 de marzo de 2026',
+    what:['El Gobierno subió el salario mínimo un 3,1%, a 1.221 € brutos en 14 pagas (17.094 € al año), por real decreto, sin votación en el Congreso.','El Congreso convalidó después el Real Decreto-ley 5/2026, que incluye una deducción en el IRPF de hasta 591 € para sueldos por debajo de 20.000 €. Según Hacienda, quien cobra el salario mínimo paga 365 € menos de IRPF que en 2025.'],
+    favor:'El Gobierno y la mayoría del Congreso: que la subida del salario mínimo llegue entera al bolsillo.',
+    contra:'Sobre la subida del salario mínimo, el Banco de España ha advertido de su coste para las pymes en relación con la productividad. En la votación de la deducción, solo Vox votó en contra.',
+    vote:'Convalidación del Real Decreto-ley 5/2026: aprobada con el único voto en contra de Vox. La fuente no da el recuento exacto.',
+    congreso:null,
+    sources:[['idealista','https://www.idealista.com/news/node/889414'],['Bolsamanía (Europa Press)','https://www.bolsamania.com/noticias/economia/economia--el-congreso-avala-la-exencion-fiscal-del-smi-al-convalidar-el-decreto-de-ayudas-por-temporales--22088478.html'],['idealista: subida del SMI','https://www.idealista.com/news/taxonomy/term/14341']] },
+  { id:'real-vivienda', title:'Ley por el Derecho a la Vivienda (Ley 12/2023)', status:'En vigor', statusColor:'var(--ok)', date:'27 de abril de 2023 (Congreso)',
+    what:['Permite limitar el precio del alquiler en zonas declaradas tensionadas.','Impulsa un parque público de vivienda y reserva al menos el 50% del suelo para vivienda protegida a alquiler.','Los desahucios deben tener fecha y hora fijadas de antemano.'],
+    favor:'PSOE, Unidas Podemos, ERC, EH Bildu, Más País, Compromís, PRC y Teruel Existe: proteger a los inquilinos frente a las subidas.',
+    contra:'PP, Vox, Ciudadanos, PNV y Junts. El PNV la consideró en parte inconstitucional por invadir competencias autonómicas.',
+    vote:'Congreso: 176 a favor, 167 en contra y 1 abstención (BNG). Senado: 134 a favor, 117 en contra y 1 abstención. Publicada en el BOE el 25 de mayo de 2023.',
+    congreso:{ yes:176, no:167, abst:1, label:'a favor' },
+    sources:[['Merca2','https://www.merca2.es/2023/04/27/ley-de-vivienda-mayoria-absoluta-1292494/'],['Brainsre','https://brainsre.news/?p=174029'],['Escola d\'Administració Pública de Catalunya','https://eapc.bibliotecadigital.gencat.cat/handle/20.500.14227/5463']] },
+  { id:'real-laboral', title:'Reforma laboral (Real Decreto-ley 32/2021)', status:'En vigor', statusColor:'var(--ok)', date:'3 de febrero de 2022',
+    what:['Pactada entre el Gobierno, los sindicatos CCOO y UGT y la patronal CEOE.','Limita los contratos temporales y sustituye partes de la reforma laboral de 2012.'],
+    favor:'PSOE, Unidas Podemos, Ciudadanos, PDeCAT, Más País, Compromís, PRC, Teruel Existe, CC y Nueva Canarias, además de sindicatos y patronal.',
+    contra:'PP y Vox, por un lado, y PNV, ERC, EH Bildu, Junts, CUP y BNG, por otro, que la consideraban insuficiente. UPN votó en contra contra el criterio de su partido.',
+    vote:'Convalidada por 175 votos a favor y 174 en contra. Salió adelante por el voto de un diputado del PP que, según su partido, se equivocó al votar por vía telemática.',
+    congreso:{ yes:175, no:174, abst:0, label:'a favor' },
+    sources:[['La Marea','https://lamarea.com/?p=152211'],['Bolsamanía (Europa Press)','https://www.bolsamania.com/noticias/economia/economia--calvino-destaca-la-legitimidad-social-de-la-reforma-laboral-y-lamenta-que-no-se-haya-aprobado-por-unanimidad--9158327.html'],['Alicante Plaza','https://alicanteplaza.es/alicanteplaza/elcongresoconvalidalareformalaboral1']] }
+];
+const lawState = {};
+function lawVoteHtml(l){
+  const st = lawState[l.id] || (lawState[l.id] = { choice:null, done:false, counts:null });
+  if (st.done) return `<p style="margin:10px 0 0"><strong>Gracias.</strong> ${LIVE ? 'Tu voto cuenta en el resultado de los visitantes. Si vuelves a votar desde la misma conexión, se sustituye.' : 'Modo demostración: no se ha guardado.'} <button type="button" class="link" data-lawagain="${l.id}">Cambiar mi voto</button></p>`;
+  return `<div style="margin-top:12px"><strong>¿Qué habrías votado tú?</strong>
+    <div class="opts" style="margin-top:6px"><button type="button" class="opt" data-law="${l.id}" data-v="si" aria-pressed="${st.choice==='si'}">Sí, a favor</button><button type="button" class="opt" data-law="${l.id}" data-v="no" aria-pressed="${st.choice==='no'}">No, con objeción</button></div>
+    ${st.choice ? `<label class="field" style="margin:10px 0 8px">${st.choice==='no' ? 'Qué cambiarías (obligatorio, no se publica)' : 'Algo que mejorarías (opcional, no se publica)'}<textarea id="lawtxt-${l.id}" style="min-height:64px"></textarea></label><button type="button" class="btn" data-lawsend="${l.id}">Enviar voto</button>` : ''}</div>`;
+}
+function lawCmpHtml(l){
+  const st = lawState[l.id] || {};
+  const c = l.congreso, cp = c ? c.yes/(c.yes+c.no+c.abst)*100 : null;
+  const v = st.counts, vn = v ? v.si + v.no : 0, vp = vn ? v.si/vn*100 : 0;
+  return `<div class="cmp">
+    <div class="meter"><div class="top"><strong>Congreso</strong><span class="v">${cp===null?'—':pct(cp)}</span></div>${cp===null?'<div class="small muted">Sin recuento publicado en la fuente</div>':`<div class="mbar"><i style="width:${cp}%;background:var(--pri)"></i></div><div class="small muted">${c.yes} ${c.label} · ${c.no} en contra${c.abst?` · ${c.abst} abstención`:''}</div>`}</div>
+    <div class="meter"><div class="top"><strong>Visitantes ${LIVE?USER:''}</strong><span class="v">${vn?pct(vp):'—'}</span></div>${vn?`<div class="mbar"><i style="width:${vp}%;background:var(--warn)"></i></div><div class="small muted">${num(v.si)} a favor · ${num(v.no)} en contra con objeción</div>`:`<div class="small muted">${LIVE?'Todavía no ha votado nadie':'Modo demostración'}</div>`}</div>
+  </div>`;
+}
+function renderLaws(){
+  $('realLaws').innerHTML = REAL_LAWS.map((l) => `<div class="law" id="law-${l.id}">
+    <div class="law-h"><div><span class="st" style="color:${l.statusColor}">${l.status}</span> <span class="xs muted">· ${l.date}</span><h3 style="font-size:18px;margin:2px 0 0">${l.title}</h3></div></div>
+    <ul style="margin:8px 0 0;padding-left:20px">${l.what.map((w) => `<li>${w}</li>`).join('')}</ul>
+    <p class="who"><strong>A favor:</strong> ${l.favor}</p>
+    <p class="who"><strong>En contra:</strong> ${l.contra}</p>
+    <p class="who"><strong>Qué votó el Congreso:</strong> ${l.vote}</p>
+    ${lawCmpHtml(l)}
+    ${lawVoteHtml(l)}
+    <div class="src">Fuentes: ${l.sources.map(([t,u]) => `<a href="${u}">${t}</a>`).join(' · ')}</div>
+  </div>`).join('');
+  if (typeof glossify === 'function' && document.readyState) try { glossify($('realLaws')); } catch(e){}
+}
+async function loadLawCounts(){
+  if (!LIVE) return;
+  const { data, error } = await db.from('votos').select('reforma,voto').like('reforma','real-%').limit(50000);
+  if (error) return;
+  REAL_LAWS.forEach((l) => { (lawState[l.id] || (lawState[l.id] = {})).counts = { si:0, no:0 }; });
+  data.forEach((x) => { const s = lawState[x.reforma]; if (s && s.counts) s.counts[x.voto]++; });
+  renderLaws();
+}
+$('realLaws').addEventListener('click', async (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.law) { lawState[b.dataset.law].choice = b.dataset.v; renderLaws(); return; }
+  if (b.dataset.lawagain) { Object.assign(lawState[b.dataset.lawagain], { done:false, choice:null }); renderLaws(); return; }
+  if (b.dataset.lawsend) {
+    const id = b.dataset.lawsend, st = lawState[id], txt = ($('lawtxt-' + id).value || '').trim();
+    if (st.choice === 'no' && txt.length < 10) { $('lawtxt-' + id).focus(); $('lawtxt-' + id).placeholder = 'Escribe qué cambiarías (al menos 10 caracteres)'; return; }
+    if (LIVE) { b.disabled = true;
+      const { error } = await db.from('votos').insert({ reforma: id, voto: st.choice });
+      if (!error && txt) await db.from('comentarios').insert({ origen: 'voto', referencia: id, texto: txt.slice(0, 2000) });
+      if (error) { b.disabled = false; b.textContent = 'No se ha podido guardar. Reintentar'; return; } }
+    st.done = true; renderLaws(); loadLawCounts();
+  }
+});
+
+/* ---------- Cómo conseguirlo ---------- */
+$('howBtn').onclick = () => openModal('La propuesta', 'Qué haría falta para que este sistema existiera',
+  `<h3>1. Cambios en las leyes</h3>
+  <div class="tbl"><table><thead><tr><th>Qué</th><th>Para qué</th><th>Mayoría necesaria</th></tr></thead><tbody>
+    <tr><td>Reforma de la Constitución (art. 68 y art. 92)</td><td>Sustituir los 300–400 diputados por portavoces con voto ponderado y hacer vinculantes los referéndums de cada reforma</td><td>3/5 del Congreso y del Senado (art. 167). Referéndum si lo pide una décima parte de una cámara. Si se tocaran los derechos fundamentales, el título preliminar o la Corona, el procedimiento del art. 168</td></tr>
+    <tr><td>Ley Orgánica del Régimen Electoral General</td><td>Regular cómo se eligen los portavoces y cuánto pesa cada uno</td><td>Mayoría absoluta del Congreso</td></tr>
+    <tr><td>Ley Orgánica sobre las modalidades de referéndum</td><td>Regular las votaciones de cada reforma, el 75% y el «no» con objeción</td><td>Mayoría absoluta del Congreso</td></tr>
+    <tr><td>Reglamento del Congreso</td><td>Introducir el voto con objeción y la negociación obligatoria</td><td>Mayoría absoluta del Congreso (art. 72)</td></tr>
+    <tr><td>Ley de Transparencia, Ley General Tributaria y Ley de Secretos Oficiales</td><td>Publicar facturas, bienes, impuestos de grandes fortunas y comunicaciones de trabajo</td><td>Mayoría simple, salvo lo que afecte a leyes orgánicas</td></tr>
+  </tbody></table></div>
+  <h3 style="margin-top:18px">2. Medios materiales</h3>
+  <ul style="padding-left:20px;margin:0">
+    <li>Una red de puntos de voto en bibliotecas y colegios públicos, con lector de DNI electrónico y personal formado.</li>
+    <li>Un sistema de voto de código abierto, con recuento verificable y auditorías independientes.</li>
+    <li>Una plataforma pública con presupuestos, contratos, facturas, bienes y comunicaciones en formato abierto.</li>
+    <li>Un consejo independiente que decida las excepciones por seguridad nacional o investigaciones en curso.</li>
+  </ul>
+  <h3 style="margin-top:18px">3. Quién puede proponer estos cambios</h3>
+  <p style="margin:0">Las leyes pueden proponerlas el Gobierno, el Congreso, el Senado, los parlamentos autonómicos o la ciudadanía con 500.000 firmas (iniciativa legislativa popular), aunque esta última no sirve para leyes orgánicas, tributarias ni internacionales (art. 87). La reforma de la Constitución solo pueden proponerla el Gobierno, el Congreso, el Senado o los parlamentos autonómicos (art. 166).</p>
+  <div class="src">Fuente: <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229">Constitución Española (BOE)</a>, arts. 68, 72, 81, 87, 92, 166, 167 y 168.</div>`);
+
+/* =====================================================================
+   GLOSARIO
+   ===================================================================== */
+// Formato: [término, texto, tipo, fuente, enlace]
+// tipo: 'ley' = texto literal de la norma · 'resumen' = resumen de una definición oficial (los diccionarios no se pueden copiar enteros) · 'propuesta' = término de esta propuesta · 'web' = cómo se calcula en esta web
+const CE = 'https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229';
+const LGT = 'https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186';
+const DPEJ = 'https://dpej.rae.es/lema/';
+const GLOSS = [
+  ['Mayoría simple','«Dichos acuerdos, para ser válidos, deberán ser aprobados por la mayoría de los miembros presentes, sin perjuicio de las mayorías especiales que establezcan la Constitución o las leyes orgánicas y las que para elección de personas establezcan los Reglamentos de las Cámaras.»','ley','Constitución Española, art. 79.2',CE+'#a79'],
+  ['Mayoría absoluta','Mayoría formada por más de la mitad de los miembros que componen el órgano, estén o no presentes. En el Congreso (350 diputados) son 176.','resumen','Diccionario panhispánico del español jurídico (RAE), «mayoría absoluta»',DPEJ+'mayoría-absoluta'],
+  ['Tres quintos (3/5)','«Los proyectos de reforma constitucional deberán ser aprobados por una mayoría de tres quintos de cada una de las Cámaras.» En el Congreso son 210 diputados.','ley','Constitución Española, art. 167.1',CE+'#a167'],
+  ['Dos tercios (2/3)','«Cuando se propusiere la revisión total de la Constitución o una parcial que afecte al Título preliminar, al Capítulo II, Sección 1.ª, del Título I, o al Título II, se procederá a la aprobación del principio por mayoría de dos tercios de cada Cámara, y a la disolución inmediata de las Cortes.» En el Congreso son 234 diputados.','ley','Constitución Española, art. 168.1',CE+'#a168'],
+  ['Cuórum','«Para adoptar acuerdos, las Cámaras deben estar reunidas reglamentariamente y con asistencia de la mayoría de sus miembros.»','ley','Constitución Española, art. 79.1',CE+'#a79'],
+  ['Escaño','Puesto o asiento de cada parlamentario en la Cámara.','resumen','Diccionario de la lengua española (RAE), «escaño»','https://dle.rae.es/escaño'],
+  ['Disciplina de voto','No tiene definición legal. Es la práctica por la que los diputados votan lo que acuerda su grupo. La Constitución dice: «Los miembros de las Cortes Generales no estarán ligados por mandato imperativo.»','ley','Constitución Española, art. 67.2',CE+'#a67'],
+  ['Portavoz','En esta propuesta, cada una de las 5 personas que representan a un partido en el Parlamento. (Hoy, en el Congreso, cada grupo parlamentario tiene un portavoz en la Junta de Portavoces.)','propuesta','Término de esta propuesta',''],
+  ['Voto ponderado','En esta propuesta, cada portavoz vota con una quinta parte del porcentaje de votos que obtuvo su partido. Ya existe algo parecido: en la Junta de Portavoces del Congreso el voto de cada portavoz equivale al número de diputados de su grupo.','propuesta','Término de esta propuesta · Congreso de los Diputados, Junta de Portavoces','https://www.congreso.es/junta-de-portavoces'],
+  ['Objeción','En esta propuesta, la explicación obligatoria de un voto en contra: qué artículo cambiarías y cómo.','propuesta','Término de esta propuesta',''],
+  ['Referéndum consultivo','«Las decisiones políticas de especial trascendencia podrán ser sometidas a referéndum consultivo de todos los ciudadanos.»','ley','Constitución Española, art. 92.1',CE+'#a92'],
+  ['Referéndum vinculante','La Constitución no usa esta expresión. El único referéndum cuyo resultado decide es el de reforma constitucional: «Aprobada la reforma por las Cortes Generales, será sometida a referéndum para su ratificación cuando así lo soliciten, dentro de los quince días siguientes a su aprobación, una décima parte de los miembros de cualquiera de las Cámaras.»','ley','Constitución Española, art. 167.3',CE+'#a167'],
+  ['Reforma constitucional','«La iniciativa de reforma constitucional se ejercerá en los términos previstos en los apartados 1 y 2 del artículo 87.» Se aprueba por la vía del art. 167 (3/5) o, para las partes más protegidas, del art. 168 (2/3, elecciones y referéndum).','ley','Constitución Española, arts. 166 a 168',CE+'#a166'],
+  ['Ley orgánica','«Son leyes orgánicas las relativas al desarrollo de los derechos fundamentales y de las libertades públicas, las que aprueben los Estatutos de Autonomía y el régimen electoral general y las demás previstas en la Constitución. La aprobación, modificación o derogación de las leyes orgánicas exigirá mayoría absoluta del Congreso, en una votación final sobre el conjunto del proyecto.»','ley','Constitución Española, art. 81',CE+'#a81'],
+  ['Ley ordinaria','Ley aprobada por las Cortes que no exige una mayoría especial ni está reservada a ley orgánica.','resumen','Diccionario panhispánico del español jurídico (RAE), «ley ordinaria»',DPEJ+'ley-ordinaria'],
+  ['Real decreto-ley','«En caso de extraordinaria y urgente necesidad, el Gobierno podrá dictar disposiciones legislativas provisionales que tomarán la forma de Decretos-leyes y que no podrán afectar al ordenamiento de las instituciones básicas del Estado, a los derechos, deberes y libertades de los ciudadanos regulados en el Título I, al régimen de las Comunidades Autónomas ni al Derecho electoral general.»','ley','Constitución Española, art. 86.1',CE+'#a86'],
+  ['Convalidación','«Los Decretos-leyes deberán ser inmediatamente sometidos a debate y votación de totalidad al Congreso de los Diputados, convocado al efecto si no estuviere reunido, en el plazo de los treinta días siguientes a su promulgación. El Congreso habrá de pronunciarse expresamente dentro de dicho plazo sobre su convalidación o derogación…»','ley','Constitución Española, art. 86.2',CE+'#a86'],
+  ['Real decreto','Norma que aprueba el Gobierno en uso de su potestad reglamentaria. La Constitución dice que el Gobierno «ejerce la función ejecutiva y la potestad reglamentaria de acuerdo con la Constitución y las leyes». El salario mínimo, por ejemplo, se fija por real decreto.','ley','Constitución Española, art. 97',CE+'#a97'],
+  ['Proyecto de ley','«Los proyectos de ley serán aprobados en Consejo de Ministros, que los someterá al Congreso, acompañados de una exposición de motivos y de los antecedentes necesarios para pronunciarse sobre ellos.» Cuando la propuesta viene del Congreso, del Senado o de la ciudadanía se llama proposición de ley (art. 89).','ley','Constitución Española, art. 88',CE+'#a88'],
+  ['Enmienda a la totalidad','«Serán enmiendas a la totalidad las que versen sobre la oportunidad, los principios o el espíritu del proyecto de ley y postulen la devolución de aquél al Gobierno o las que propongan un texto completo alternativo al del proyecto.»','ley','Reglamento del Congreso de los Diputados, art. 110.3','https://www.congreso.es/cem/tit5'],
+  ['Reglamento del Congreso','«Las Cámaras establecen sus propios Reglamentos, aprueban autónomamente sus presupuestos y, de común acuerdo, regulan el Estatuto del Personal de las Cortes Generales. Los Reglamentos y su reforma serán sometidos a una votación final sobre su totalidad, que requerirá la mayoría absoluta.»','ley','Constitución Española, art. 72.1',CE+'#a72'],
+  ['Iniciativa legislativa popular','«Una ley orgánica regulará las formas de ejercicio y requisitos de la iniciativa popular para la presentación de proposiciones de ley. En todo caso se exigirán no menos de 500.000 firmas acreditadas. No procederá dicha iniciativa en materias propias de ley orgánica, tributarias o de carácter internacional, ni en lo relativo a la prerrogativa de gracia.»','ley','Constitución Española, art. 87.3',CE+'#a87'],
+  ['Agrupación de electores','Candidatura que no presenta un partido ni una coalición, sino un grupo de electores que reúne las firmas que exige la ley.','resumen','Ley Orgánica 5/1985 del Régimen Electoral General, art. 44','https://www.boe.es/eli/es/lo/1985/06/19/5'],
+  ['Presupuestos Generales del Estado','«Los Presupuestos Generales del Estado tendrán carácter anual, incluirán la totalidad de los gastos e ingresos del sector público estatal y en ellos se consignará el importe de los beneficios fiscales que afecten a los tributos del Estado.»','ley','Constitución Española, art. 134.2',CE+'#a134'],
+  ['Prórroga presupuestaria','«Si la Ley de Presupuestos no se aprobara antes del primer día del ejercicio económico correspondiente, se considerarán automáticamente prorrogados los Presupuestos del ejercicio anterior hasta la aprobación de los nuevos.»','ley','Constitución Española, art. 134.4',CE+'#a134'],
+  ['Techo de gasto','«El Estado, las Comunidades Autónomas y las Corporaciones Locales aprobarán, en sus respectivos ámbitos, un límite máximo de gasto no financiero, coherente con el objetivo de estabilidad presupuestaria y la regla de gasto, que marcará el techo de asignación de recursos de sus Presupuestos.»','ley','Ley Orgánica 2/2012 de Estabilidad Presupuestaria, art. 30.1','https://www.boe.es/eli/es/lo/2012/04/27/2'],
+  ['Política de gasto','Cada uno de los grandes bloques en que se agrupa el gasto de los Presupuestos (pensiones, sanidad, defensa, vivienda…), según la clasificación que publica el Ministerio de Hacienda.','resumen','Secretaría de Estado de Presupuestos y Gastos','https://www.sepg.pap.hacienda.gob.es/'],
+  ['IRPF','«El Impuesto sobre la Renta de las Personas Físicas es un tributo de carácter personal y directo que grava, según los principios de igualdad, generalidad y progresividad, la renta de las personas físicas de acuerdo con su naturaleza y sus circunstancias personales y familiares.»','ley','Ley 35/2006 del IRPF, art. 1','https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764#a1'],
+  ['Impuesto de Sociedades','«El Impuesto sobre Sociedades es un tributo de carácter directo y naturaleza personal que grava la renta de las sociedades y demás entidades jurídicas de acuerdo con las normas de esta Ley.» El tipo general es el 25 % (art. 29).','ley','Ley 27/2014 del Impuesto sobre Sociedades, art. 1','https://www.boe.es/buscar/act.php?id=BOE-A-2014-12328#a1'],
+  ['IVA','«El Impuesto sobre el Valor Añadido es un tributo de naturaleza indirecta que recae sobre el consumo y grava, en la forma y condiciones previstas en esta Ley, las siguientes operaciones: a) Las entregas de bienes y prestaciones de servicios efectuadas por empresarios o profesionales. b) Las adquisiciones intracomunitarias de bienes. c) Las importaciones de bienes.» El tipo general es el 21 % (art. 90).','ley','Ley 37/1992 del IVA, art. 1','https://www.boe.es/buscar/act.php?id=BOE-A-1992-28740#a1'],
+  ['Base imponible','«La base imponible es la magnitud dineraria o de otra naturaleza que resulta de la medición o valoración del hecho imponible.»','ley','Ley 58/2003 General Tributaria, art. 50.1',LGT+'#a50'],
+  ['Tipo de gravamen','«El tipo de gravamen es la cifra, coeficiente o porcentaje que se aplica a la base liquidable para obtener como resultado la cuota íntegra.»','ley','Ley 58/2003 General Tributaria, art. 55.1',LGT+'#a55'],
+  ['Tipo efectivo','No es un término legal. En esta web es el impuesto pagado dividido entre lo ganado (sueldo bruto, o beneficio antes de impuestos en las empresas), en porcentaje. Suele ser menor que el tipo de gravamen por las deducciones.','web','Cálculo de esta web',''],
+  ['Beneficio antes de impuestos','Línea «Resultado antes de impuestos» de la cuenta de pérdidas y ganancias que publica cada empresa: lo que queda tras restar todos los gastos, antes del Impuesto de Sociedades.','resumen','Plan General de Contabilidad (Real Decreto 1514/2007)','https://www.boe.es/eli/es/rd/2007/11/16/1514'],
+  ['Seguridad Social','«Los poderes públicos mantendrán un régimen público de Seguridad Social para todos los ciudadanos, que garantice la asistencia y prestaciones sociales suficientes ante situaciones de necesidad, especialmente en caso de desempleo.»','ley','Constitución Española, art. 41',CE+'#a41'],
+  ['Cotización','Aportación obligatoria a la Seguridad Social por cada persona que trabaja; en el trabajo por cuenta ajena una parte la paga la persona trabajadora y otra la empresa.','resumen','Ley General de la Seguridad Social (Real Decreto Legislativo 8/2015), arts. 18 y siguientes','https://www.boe.es/eli/es/rdlg/2015/10/30/8'],
+  ['Cuota de autónomo','Lo que paga cada mes un trabajador autónomo a la Seguridad Social. Desde 2023 depende de sus rendimientos netos, por tramos.','resumen','Real Decreto-ley 13/2022 (sistema de cotización por ingresos reales)','https://www.boe.es/eli/es/rdl/2022/07/26/13'],
+  ['Secreto tributario','«Los datos, informes o antecedentes obtenidos por la Administración tributaria en el desempeño de sus funciones tienen carácter reservado y sólo podrán ser utilizados para la efectiva aplicación de los tributos o recursos cuya gestión tenga encomendada…»','ley','Ley 58/2003 General Tributaria, art. 95.1',LGT+'#a95'],
+  ['Dividendo','Parte de las ganancias que una sociedad reparte y que corresponde a cada acción.','resumen','Diccionario de la lengua española (RAE), «dividendo»','https://dle.rae.es/dividendo'],
+  ['Sociedad patrimonial','La ley la llama «entidad patrimonial»: aquella en la que más de la mitad de su activo son valores o bienes que no están afectos a una actividad económica.','resumen','Ley 27/2014 del Impuesto sobre Sociedades, art. 5.2','https://www.boe.es/buscar/act.php?id=BOE-A-2014-12328#a5'],
+  ['Paraíso fiscal','La ley española usa hoy «jurisdicción no cooperativa»: países o territorios que España considera opacos o de tributación nula o muy baja, según criterios fijados por ley.','resumen','Ley 36/2006 de prevención del fraude fiscal, disposición adicional primera','https://www.boe.es/eli/es/l/2006/11/29/36'],
+  ['Salario mínimo interprofesional','«El Gobierno fijará, previa consulta con las organizaciones sindicales y asociaciones empresariales más representativas, anualmente, el salario mínimo interprofesional…» En 2026 es de 1.221 € brutos al mes en 14 pagas.','ley','Estatuto de los Trabajadores, art. 27.1','https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430#a27'],
+  ['IPREM','Indicador Público de Renta de Efectos Múltiples: la cifra de referencia que se usa en lugar del salario mínimo para dar ayudas, becas y subsidios. Se fija cada año.','resumen','Real Decreto-ley 3/2004, art. 2','https://www.boe.es/eli/es/rdl/2004/06/25/3'],
+  ['Zona tensionada','Zona de mercado residencial tensionado que puede declarar cada comunidad autónoma cuando el coste de la vivienda supera los umbrales que fija la ley respecto a los ingresos de los hogares o a la subida de precios.','resumen','Ley 12/2023 por el derecho a la vivienda, art. 18','https://www.boe.es/buscar/act.php?id=BOE-A-2023-12203#a18'],
+  ['Reglas fiscales europeas','Normas de la Unión Europea que obligan a cada país a mantener el déficit y la deuda pública dentro de unos límites y a presentar un plan de gasto a medio plazo.','resumen','Reglamento (UE) 2024/1263','https://eur-lex.europa.eu/eli/reg/2024/1263/oj'],
+  ['OTAN','Organización del Tratado del Atlántico Norte: alianza de defensa de 32 países, entre ellos España y Estados Unidos, basada en el Tratado de Washington de 1949.','resumen','OTAN (web oficial)','https://www.nato.int/'],
+  ['Lobby','Grupo de presión: conjunto de personas u organizaciones que intentan influir en las decisiones públicas a favor de sus intereses.','resumen','Diccionario de la lengua española (RAE), «lobby»','https://dle.rae.es/lobby'],
+  ['DNI electrónico','DNI con un chip que permite identificarse y firmar de forma electrónica con la misma validez que la firma manuscrita.','resumen','Real Decreto 1553/2005, del DNI y sus certificados de firma electrónica','https://www.boe.es/eli/es/rd/2005/12/23/1553']
+];
+const GLOSS_KIND = { ley:'Texto literal', resumen:'Resumen de la definición oficial', propuesta:'Término de esta propuesta (no es una definición oficial)', web:'Cómo se calcula en esta web' };
+const glossSrc = (g) => `<span class="gsrc">${GLOSS_KIND[g[2]]}${g[2]==='propuesta'&&!g[4] || g[2]==='web' ? '' : ' · ' + (g[4] ? `<a href="${g[4]}" target="_blank" rel="noopener">${g[3]}</a>` : g[3])}</span>`;
+function renderGloss(){
+  const q = ($('gq').value || '').trim().toLowerCase();
+  $('glossList').innerHTML = GLOSS.slice().sort((a,b) => a[0].localeCompare(b[0],'es'))
+    .filter((g) => !q || (g[0] + ' ' + g[1]).toLowerCase().includes(q))
+    .map((g) => `<dt id="g-${g[0].toLowerCase().replace(/[^a-záéíóúñü0-9]+/g,'-')}">${g[0]}</dt><dd>${g[1]}${glossSrc(g)}</dd>`).join('') || '<p class="muted">Ningún término coincide.</p>';
+}
+$('gq').addEventListener('input', renderGloss);
+const GLOSS_KEYS = GLOSS.map(([t]) => t).concat(['proposición de ley','real decreto ley']).sort((a,b) => b.length - a.length);
+const glossFor = (word) => { const w = word.toLowerCase(); return GLOSS.find(([t]) => t.toLowerCase() === w) || GLOSS.find(([t]) => (t === 'Proyecto de ley' && w === 'proposición de ley') || (t === 'Real decreto-ley' && w === 'real decreto ley')); };
+const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const GLOSS_RE = new RegExp('(^|[^A-Za-zÁÉÍÓÚÑÜáéíóúñü])(' + GLOSS_KEYS.map(escRe).join('|') + ')(?![A-Za-zÁÉÍÓÚÑÜáéíóúñü])', 'i');
+function glossify(root){
+  const seen = new Set();
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n){
+    const p = n.parentElement; if (!p || p.closest('button, a, input, textarea, label, script, style, h1, .term, #glossList, nav, .notice, th, .tag')) return NodeFilter.FILTER_REJECT;
+    return GLOSS_RE.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; } });
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((n) => {
+    const m = n.nodeValue.match(GLOSS_RE); if (!m) return;
+    const g = glossFor(m[2]); if (!g || seen.has(g[0])) return; seen.add(g[0]);
+    const start = m.index + m[1].length, after = n.splitText(start); after.nodeValue = after.nodeValue.slice(m[2].length);
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'term'; b.dataset.term = g[0]; b.textContent = m[2];
+    n.parentNode.insertBefore(b, after);
+  });
+}
+document.addEventListener('click', (e) => { const b = e.target.closest('.term'); if (!b) return; const g = GLOSS.find(([t]) => t === b.dataset.term);
+  if (g) openModal('Glosario', g[0], `<p style="margin:0">${g[1]}</p><p style="margin:8px 0 0">${glossSrc(g)}</p><p style="margin:12px 0 0"><a href="#glosario" id="toGloss">Ver todo el glosario</a></p>`); });
+document.addEventListener('click', (e) => { if (e.target.id === 'toGloss') closeModal(); });
+renderGloss();
+renderLaws(); loadLawCounts();
+
+renderReforms(); renderConcerns(); renderBuzon(); renderCuentas(); renderPoder(); renderComs(); route();
+document.querySelectorAll('main section[data-view]').forEach((s) => { if (s.dataset.view !== 'glosario') glossify(s); });
+})();
+
+</script>
+</body>
+</html>
