@@ -429,15 +429,8 @@ footer a{color:#fff}
 <section data-view="prioridades" class="hidden">
   <div class="crumbs">Inicio › Prioridades ciudadanas</div>
   <h1 style="margin-top:8px">Prioridades ciudadanas</h1>
-  <p class="intro">Elige los problemas que te preocupan y ordénalos. Tu primera prioridad suma 8 puntos, la segunda 7, y así sucesivamente. El problema con más puntos es el primero que el Gobierno debe reformar. <span class="tag sim">Simulado</span></p>
-  <div class="box hidden" id="liveRank"></div>
-  <div class="cols">
-    <div class="col-main box">
-      <h2>Clasificación de ejemplo <span class="tag sim">Simulado</span></h2>
-      <p class="muted small" style="margin-bottom:14px">Porcentaje del total de puntos</p>
-      <div class="tbl"><table><thead><tr><th style="width:44px">#</th><th>Problema</th><th style="width:38%">Puntos</th><th class="r">%</th></tr></thead><tbody id="cBody"></tbody></table></div>
-    </div>
-    <div class="col-side box">
+  <p class="intro">Elige los problemas que te preocupan y ordénalos. Tu primera prioridad suma 8 puntos, la segunda 7, y así sucesivamente. El problema con más puntos es el primero que el Gobierno debe reformar. <span class="tag user">Respuesta real</span></p>
+  <div class="box" style="max-width:720px">
       <div id="pForm">
         <h2>Tu clasificación</h2>
         <div class="field" style="margin-top:12px">Problemas que te preocupan<span class="hint">Púlsalos en orden de importancia. Puedes elegir uno, dos o todos.</span><div class="opts" id="cOpts"></div></div>
@@ -451,8 +444,8 @@ footer a{color:#fff}
         <p id="pMsg"></p>
         <button type="button" class="btn sec" id="pReset">Modificar</button>
       </div>
-    </div>
   </div>
+  <div class="box hidden" id="liveRank"></div>
 </section>
 
 <!-- ================= BUZÓN ================= -->
@@ -967,8 +960,6 @@ $('lawBtn').onclick = () => { const r = REFORMS[vs.sel];
    ===================================================================== */
 const ps = { picks:[] };
 function renderConcerns(){
-  const max = CONCERNS[0][1];
-  $('cBody').innerHTML = CONCERNS.map(([n,p],i) => `<tr><td>${i+1}</td><td><strong>${n}</strong>${i===0?' <span class="small" style="color:var(--warn);font-weight:700">· reforma en marcha</span>':''}</td><td><div class="bar"><i style="width:${p/max*100}%"></i></div></td><td class="r">${pct(p)}</td></tr>`).join('');
   $('cOpts').innerHTML = CONCERNS.map(([n]) => { const i = ps.picks.indexOf(n);
     return `<button type="button" class="opt" data-cat="${esc(n)}" aria-pressed="${i>=0}">${n}${i>=0?`<span class="n">${i+1}º</span>`:''}</button>`; }).join('');
   $('rankWrap').classList.toggle('hidden', ps.picks.length === 0);
